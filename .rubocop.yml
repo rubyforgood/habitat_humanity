@@ -6,5 +6,6 @@ AllCops:
   Exclude:
     - db/**/*
     - vendor/**/*
+    - spec/factories/*
 Style/FrozenStringLiteralComment:
   Enabled: false
