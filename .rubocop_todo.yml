@@ -20,3 +20,6 @@ Style/Documentation:
     - 'app/controllers/application_controller.rb'
     - 'app/helpers/application_helper.rb'
     - 'config/application.rb'
+
+Style/Documentation:
+  Enabled: false
