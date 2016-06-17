@@ -3,7 +3,7 @@ class CheckInForm
 
   attr_accessor :name, :email, :work_site_id, :signature
 
-  def initialize(attributes)
+  def initialize(attributes={})
     @name         = attributes[:name]
     @email        = attributes[:email]
     @work_site_id = attributes[:work_site_id]
