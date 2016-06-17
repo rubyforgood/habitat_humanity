@@ -12,4 +12,8 @@ RSpec.describe SignaturesReport, type: :report do
     expect(report.end).to eq(end_date)
     expect(report.end - report.begin).to eq(6)
   end
+
+  it 'generates a hash for the covered days' do
+    expect(report.data.keys).to eq([*begin_date..end_date])
+  end
 end
