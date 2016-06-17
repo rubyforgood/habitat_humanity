@@ -14,9 +14,6 @@ group :development, :test do
   gem 'better_errors'
   gem 'rspec-rails', '~> 3.0'
   gem 'rubocop'
-  gem 'guard'
-  gem 'guard-rspec', require: false
-  gem 'guard-rubocop', require: false
 end
 
 group :development do
@@ -24,4 +21,7 @@ group :development do
   gem 'pry-doc'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'guard'
+  gem 'guard-rspec', require: false
+  gem 'guard-rubocop', require: false
 end
