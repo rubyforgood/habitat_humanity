@@ -1,0 +1,25 @@
+<%= form_for check_in_form, url: check_ins_path do |form| %>
+  <p>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </p>
+
+  <p>
+    <%= form.label :work_site %>
+    <%= form.collection_select :work_site, WorkSite.all, :id, :address %>
+  </p>
+
+  <p>
+    <%= form.label :signature %>
+    <%= form.text_field :signature %>
+  </p>
+
+  <p>
+    <%= form.submit 'Check In' %>
+  </p>
+<% end %>
