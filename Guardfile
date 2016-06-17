@@ -41,7 +41,7 @@ group :red_green_refactor, halt_on_fail: true do
     watch(rails.layouts)       { |m| rspec.spec.call("features/#{m[1]}") }
   end
 
-  guard :rubocop, all_on_start: true do
+  guard :rubocop, all_on_start: true, cli: '-aD' do
     watch(/.+\.rb$/)
     watch(%r{(?:.+\/)?\.rubocop\.yml$}) { |m| File.dirname(m[0]) }
     watch(%r{(?:.+\/)?\.rubocop_todo\.yml$}) { |m| File.dirname(m[0]) }
