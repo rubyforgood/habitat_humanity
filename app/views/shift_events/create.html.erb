@@ -1,0 +1,11 @@
+<%= form_for @shift_event, id: 'Signature-form' do |f| %>
+  <div class="Signature" id="Signature">
+    <canvas class="Signature-pad"></canvas>
+    <div class="Signature-footer">
+        <div class="description">Sign above</div>
+        <%= f.text_field :signature, id: 'hidden' %>
+        <button type="button" class="Signature-button Signature-clear" data-action="clear">Clear</button>
+        <button type="button" class="Signature-button Signature-save" data-action="save">Save</button>
+      </div>
+  </div>
+<% end %>
