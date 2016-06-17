@@ -8,7 +8,7 @@ class SignaturesReport
 
   def self.for_week(ending:)
     end_date = Date.parse(ending.to_s)
-    begin_date = end_date - 7
+    begin_date = end_date - 6
     new(begin_date, end_date)
   end
 end
