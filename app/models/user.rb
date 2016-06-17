@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Never re-order this array
-  ROLES = %w[admin site_supervisor].freeze
+  ROLES = %w(admin site_supervisor).freeze
 
   def roles=(roles)
     self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.inject(0, :+)
