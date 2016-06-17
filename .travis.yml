@@ -8,6 +8,9 @@ addons:
     packages:
     - libxslt1-dev
     - libxml2-dev
+cache:
+  - apt
+  - bundler
 before_install:
 - bundle config build.nokogiri --use-system-libraries
 before_script:
