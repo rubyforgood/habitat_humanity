@@ -1,0 +1,26 @@
+language: ruby
+rvm:
+- 2.3.1
+branches:
+  only:
+  - master
+sudo: false
+addons:
+  postgresql: '9.4'
+  apt:
+    packages:
+    - libxslt1-dev
+    - libxml2-dev
+cache:
+  - apt
+  - bundler
+before_install:
+- bundle config build.nokogiri --use-system-libraries
+before_script:
+- bundle exec rake travis:before_script
+script:
+- bundle exec rake travis:script
+notifications:
+  email: false
+  slack:
+    secure: sM0ay8bRn1D3v6oZLeO9WizjRMJjAbwd+wVdEzuiSqwG5ppM2S9M39y+bz4oMb6Z1FXsznexCPczKYMpse0vRUNFrYfWOivIiNCY2byMVY3+/Xt3dnvx8CiC3Ivty8YSFLMKnzYYPrGVV4qjzWY4ivD82fpNify+b8hjjRDnhYwXwLk0qcvgVtpl9g2NcKtVD3pGFfP2i5ptMTmgoZBDRX3BYvSXsERJvcJfmYT0pm7zg1UFddKHw/Nh/T1dCYno75o5iLk0boWPxzHFbkFuR3bMA9NnzIuY17d3vqEbDBuGTBDS+BNDkYWQzY3OlLKgoOd/5q4PqLe1fFJfTk9EtlEdEhde5XkwEmZKgFgaAX/i4pztQ83zEQvftERWS9OGRRUig8kMk3vtibX99L7hOPDa3m55lq83EtnbtuYQhthmFBwCYbYtYVrqFCh2a+YA+N8ApZ/ki0pFRZ7/tuuRewEqQSWf9XHgoSwE18GSJZd3GPcSjTyAvhLXMOOh/9Qcje5FzdK9VHFVMVgo+/JKayHo/Z/7R7NOPCF2RJk4mX6J7ceyFY5WkIXScIzdS8R6hFhbVlYuBwiy+acsJBl78eZAyEwmSE93zLUdQkHqeVSjcZz6LmiKLwIm6HVlFjkWSlTxg0kBoMP3dTKeklYSFF+c+OOLPxcFvEsCRjuGSlo=

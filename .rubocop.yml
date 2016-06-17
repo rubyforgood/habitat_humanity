@@ -2,4 +2,9 @@ inherit_from: .rubocop_todo.yml
 Rails:
   Enabled: true
 AllCops:
-  TargetRubyVersion: 2.1
+  TargetRubyVersion: 2.3
+  Exclude:
+    - db/**/*
+    - vendor/**/*
+Style/FrozenStringLiteralComment:
+  Enabled: false

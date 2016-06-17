@@ -5,5 +5,5 @@ class Shift < ActiveRecord::Base
   validates :work_site, presence: true
   validates :volunteer, presence: true
   validates :date,      presence: true,
-    uniqueness: {scope: [:work_site_id, :volunteer_id]}
+                        uniqueness: { scope: [:work_site_id, :volunteer_id] }
 end
