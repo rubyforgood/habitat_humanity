@@ -6,7 +6,6 @@ RSpec.describe SignaturesReport, type: :report do
   let(:begin_date) { end_date - 6 }
   let(:report) { SignaturesReport.for_week(ending: end_date) }
 
-
   it 'instantiates a report based on the end of the week' do
     expect(report.begin).to eq(begin_date)
     expect(report.end).to eq(end_date)
