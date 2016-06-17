@@ -1,6 +1,11 @@
 class SignaturesReport
   attr_reader :begin, :end
 
+  ##
+  # @param begin_date [String,Date]
+  #   Date or String parseable as a Date
+  # @param end_date [String,Date]
+  #   Date or String parseable as a Date
   def initialize(begin_date, end_date)
     @begin = Date.parse(begin_date.to_s)
     @end = Date.parse(end_date.to_s)
@@ -8,6 +13,7 @@ class SignaturesReport
 
   ##
   # @param ending [String,Date]
+  #   Date or String parseable as a Date
   #
   # @return [SignaturesReport]
   def self.for_week(ending:)
