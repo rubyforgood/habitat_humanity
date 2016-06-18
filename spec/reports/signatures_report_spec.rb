@@ -13,6 +13,7 @@ RSpec.describe SignaturesReport, type: :report do
   end
 
   it 'generates CSV' do
+    # Create a shift inside our weekly report period
     FactoryGirl.create(:shift, :full, day: begin_date + 1)
     round_trip = CSV.parse(report.to_csv)
     expect(round_trip.size).to be > 1
