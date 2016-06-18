@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   authenticate :user do
     namespace :admin do
+      resources :users
       resources :work_sites
       resources :volunteers
       resources :shifts

@@ -1,7 +1,7 @@
 //= require signature_pad
 $( document ).ready(function() {
   var wrapper = document.getElementById("Signature"),
-      clearButton = wrapper.querySelector("[data-action=clear]"),
+      clearButton = document.getElementById("clear"),
       saveButton = wrapper.querySelector("[data-action=save]"),
       canvas = wrapper.querySelector("canvas"),
       signaturePad;
@@ -30,14 +30,12 @@ $( document ).ready(function() {
 
   saveButton.addEventListener("click", function (event) {
       if (signaturePad.isEmpty()) {
-          alert("Please provide signature first.");
+          // alert("Please provide signature first.");
       }
   });
 
-  $('.Signature-save').click(function(e) {
-    $('#hidden').val(signaturePad.toDataURL());
-    console.log($('.Signature-save').closest('form'))
-      $('.Signature-save').closest('form').submit();
+  $('#new_check_in_form').submit(function( event ) {
+    $('#check_in_form_signature').val(signaturePad.toDataURL());
   });
 
 })
