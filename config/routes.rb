@@ -2,13 +2,15 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'home#index'
 
-  namespace :admin do
-    resources :work_sites
-    resources :volunteers
-    resources :shifts
-    # resources :shift_events ### not needed for this app
+  authenticate :user do
+    namespace :admin do
+      resources :work_sites
+      resources :volunteers
+      resources :shifts
+      # resources :shift_events ### not needed for this app
 
-    root to: 'shifts#index'
+      root to: 'shifts#index'
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
