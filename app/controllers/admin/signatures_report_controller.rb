@@ -1,7 +1,7 @@
 module Admin
   class SignaturesReportController < Admin::ApplicationController
     def index
-      end_date = params.fetch(:end_date, Date.today)
+      end_date = params.fetch(:end_date, Time.zone.today)
       super
       @report = SignaturesReport.for_week(ending: end_date)
 

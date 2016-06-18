@@ -9,11 +9,11 @@ class Shift < ActiveRecord::Base
                         uniqueness: { scope: [:work_site_id, :volunteer_id] }
 
   def shift_start
-    shift_events.find_by(action: 'start_shift').first
+    shift_events.find_by(action: 'start_shift')
   end
 
   def shift_end
-    shift_events.where(action: 'end_shift').first
+    shift_events.find_by(action: 'end_shift')
   end
 
   def started?

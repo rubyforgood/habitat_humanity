@@ -47,13 +47,13 @@ class SignaturesReport
       .order(:occurred_at)
   end
 
-  JOINED_HEADERS = ['address',
-                    'day',
-                    'occurred_at',
-                    'action',
-                    'name',
-                    'email',
-                    'signature'].freeze
+  JOINED_HEADERS = %w(address
+                      day
+                      occurred_at
+                      action
+                      name
+                      email
+                      signature).freeze
 
   def to_csv
     join = pull_join
