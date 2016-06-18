@@ -2,6 +2,7 @@ class CheckInForm < ApplicationForm
   DATE_FORMAT     = '%d %B, %Y'.freeze
   TIME_FORMAT     = '%l:%M %p'.freeze
   COMBINED_FORMAT = "#{DATE_FORMAT} #{TIME_FORMAT}".freeze
+  SHIFT_ACTIONS   = ['start_shift', 'end_shift']
 
   attr_accessor :name, :email, :work_site_id, :day, :time, :action, :signature
 
@@ -11,7 +12,7 @@ class CheckInForm < ApplicationForm
   validates :day,       presence: true
   validates :time,      presence: true
   validates :action,    presence: true
-  validates :signature, presence: true
+  validates :signature, presence: true, if: :shift_action?
 
   def initialize(attributes = {})
     @name         = attributes[:name]
@@ -36,6 +37,10 @@ class CheckInForm < ApplicationForm
   end
 
   private
+
+  def shift_action?
+    SHIFT_ACTIONS.include? action
+  end
 
   def shift_day
     Date.strptime day, DATE_FORMAT
