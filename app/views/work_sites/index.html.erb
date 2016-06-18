@@ -1,0 +1,5 @@
+<ul>
+<% work_sites.each do |site|%>
+  <li><%=link_to site.address,work_site_path(site) %></li>
+<% end %>
+</ul>

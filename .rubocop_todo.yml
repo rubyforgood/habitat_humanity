@@ -11,6 +11,8 @@
 # URISchemes: http, https
 Metrics/LineLength:
   Max: 130
+  Exclude:
+    - 'config/**/*'
 
 # Offense count: 3
 Style/Documentation:
