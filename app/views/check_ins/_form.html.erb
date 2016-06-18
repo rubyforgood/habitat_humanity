@@ -1,0 +1,20 @@
+<%= form_for check_in_form, url: work_site_check_ins_path(work_site) do |form| %>
+  <p>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </p>
+
+  <p>
+    <%= form.label :signature %>
+    <%= form.text_field :signature %>
+  </p>
+
+  <p>
+    <%= form.submit 'Check In' %>
+  </p>
+<% end %>
