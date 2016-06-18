@@ -6,7 +6,7 @@ FactoryGirl.define do
 
     trait :full do
       after(:build) do |shift|
-        ShiftEvent::ACTIONS.zip(
+        ShiftEvent::ACTIONS.keys.zip(
           Array.new(4) { Faker::Time.between(shift.day, shift.day) }.sort
         ).each do |(action, occurred_at)|
           create(
