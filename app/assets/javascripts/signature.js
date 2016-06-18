@@ -28,14 +28,7 @@ $( document ).ready(function() {
       signaturePad.clear();
   });
 
-  saveButton.addEventListener("click", function (event) {
-      if (signaturePad.isEmpty()) {
-          // alert("Please provide signature first.");
-      }
-  });
-
   $('#new_check_in_form').submit(function( event ) {
     $('#check_in_form_signature').val(signaturePad.toDataURL());
   });
-
 })
