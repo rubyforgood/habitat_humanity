@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :shifts
       resources :report_recipients
       # resources :shift_events ### not needed for this app
+      resources :signatures_report, only: [:index], defaults: { format: :csv }
 
       root to: 'shifts#index'
     end
