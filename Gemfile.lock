@@ -171,6 +171,7 @@ GEM
       ffi (>= 0.5.0)
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
+    role_model (0.8.2)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -254,6 +255,7 @@ DEPENDENCIES
   pry-doc
   pry-rails
   rails (~> 4.2.6)
+  role_model
   rspec-rails (~> 3.0)
   rubocop
   sass-rails (~> 5.0)
