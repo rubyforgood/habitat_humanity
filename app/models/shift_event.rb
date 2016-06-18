@@ -9,6 +9,6 @@ class ShiftEvent < ActiveRecord::Base
   belongs_to :shift
 
   validates :shift,       presence: true
-  validates :action,      presence: true
+  validates :action,      presence: true, inclusion: { in: ACTIONS }
   validates :occurred_at, presence: true
 end
