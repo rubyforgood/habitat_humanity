@@ -1,7 +1,7 @@
 class CheckInForm < ApplicationForm
-  DATE_FORMAT     = '%d %B, %Y'
-  TIME_FORMAT     = '%l:%M %p'
-  COMBINED_FORMAT = "#{DATE_FORMAT} #{TIME_FORMAT}"
+  DATE_FORMAT     = '%d %B, %Y'.freeze
+  TIME_FORMAT     = '%l:%M %p'.freeze
+  COMBINED_FORMAT = "#{DATE_FORMAT} #{TIME_FORMAT}".freeze
 
   attr_accessor :name, :email, :work_site_id, :day, :time, :action, :signature
 
