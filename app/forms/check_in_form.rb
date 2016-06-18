@@ -1,4 +1,9 @@
 class CheckInForm < ApplicationForm
+  DATE_FORMAT     = '%d %B, %Y'.freeze
+  TIME_FORMAT     = '%l:%M %p'.freeze
+  COMBINED_FORMAT = "#{DATE_FORMAT} #{TIME_FORMAT}".freeze
+  SHIFT_ACTIONS   = %w(start_shift end_shift).freeze
+
   attr_accessor :name, :email, :work_site_id, :day, :time, :action, :signature
 
   validates :name,      presence: true
@@ -7,20 +12,16 @@ class CheckInForm < ApplicationForm
   validates :day,       presence: true
   validates :time,      presence: true
   validates :action,    presence: true
-  validates :signature, presence: true
+  validates :signature, presence: true, if: :shift_action?
 
   def initialize(attributes = {})
     @name         = attributes[:name]
     @email        = attributes[:email]
     @work_site_id = attributes[:work_site_id]
-    @time         = attributes[:time]
+    @day          = attributes[:day] || Time.zone.today.strftime(DATE_FORMAT)
+    @time         = attributes[:time] || Time.current.strftime(TIME_FORMAT)
     @action       = attributes[:action]
     @signature    = attributes[:signature]
-
-    @day  = Date.strptime(attributes[:day], '%d %B, %Y') if attributes[:day]
-    @time = Time.strptime(
-      "#{attributes[:day]} #{attributes[:time]}", '%d %B, %Y %l:%M %p'
-    ) if attributes[:day] && attributes[:time]
   end
 
   def save
@@ -37,21 +38,33 @@ class CheckInForm < ApplicationForm
 
   private
 
+  def shift_action?
+    SHIFT_ACTIONS.include? action
+  end
+
+  def shift_day
+    Date.strptime day, DATE_FORMAT
+  end
+
+  def occurred_at
+    Time.strptime "#{day} #{time}", COMBINED_FORMAT
+  end
+
   def shift
     @shift ||= Shift.find_by(
       volunteer_id: volunteer,
       work_site_id: work_site,
-      day:          day
+      day:          shift_day
     ) || Shift.new(
       volunteer: volunteer,
       work_site: work_site,
-      day:       day
+      day:       shift_day
     )
   end
 
   def shift_event
     @shift_event ||= shift.shift_events.build(
-      occurred_at: time,
+      occurred_at: occurred_at,
       signature:   signature,
       action:      action
     )
