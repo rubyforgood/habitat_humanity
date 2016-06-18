@@ -14,8 +14,39 @@
  *= require_self
  */
 
- @import "materialize";
+@import "materialize";
+@import "lolliclock";
+
+// colors
+  $color-primary: #8BB6D1; // light blue
+  $color-text: #005596; // dark blue
+  $color-background: #fff; // white
+  $color-accent: #6CC568; // green
 
 #hidden {
-    display: none;
+  display: none;
+}
+
+body {
+  background-color: $color-primary;
+}
+
+.container {
+  margin-top: 0;
+  padding: 1.5rem;
+  background-color: $color-background;
+  height: 100vh;
+}
+
+.Signature {
+  &-pad {
+    border: 1px solid $color-text;
+    // width: 100%;
+  }
+  &-button {
+    background-color: $color-primary;
+    &:hover {
+      background-color: $color-accent;
+    }
+  }
 }

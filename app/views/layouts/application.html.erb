@@ -7,16 +7,25 @@
         <%= csrf_meta_tags %>
     </head>
     <body>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
 
-        <% if !current_user %>
-        <%= link_to "Sign In", new_user_session_path %>
-    <% else %>
-        <%= link_to "Sign Out", destroy_user_session_path %>
-        <% end %>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="#!" class="brand-logo"><%= image_tag("logo.gif") %></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li>
+                            <a href="sass.html">Sass</a>
+                        </li>
+                        <li>
+                            <a href="badges.html">Components</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
 
-        <%= yield %>
-
+        <div class='container'>
+            <%= yield %>
+        </div>
     </body>
 </html>
