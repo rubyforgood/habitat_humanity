@@ -11,4 +11,5 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 Style/DoubleNegation:
   Enabled: false
-
+Style/TrailingCommaInLiteral:
+  Enabled: false
