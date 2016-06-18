@@ -57,7 +57,10 @@ class SignaturesReport
 
   def to_csv
     join = pull_join
-    CSV.generate(write_headers: true, headers: JOINED_HEADERS) do |csv|
+    CSV.generate(write_headers: false, headers: JOINED_HEADERS) do |csv|
+      # Don't want to rely on `write_headers: true` since we want still
+      # header row in the CSV file even when there is no data.
+      csv << JOINED_HEADERS
       join.each { |record| csv << record.attributes }
     end
   end
