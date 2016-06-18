@@ -6,7 +6,7 @@ class CheckInForm < ApplicationForm
   validates :work_site, presence: true
   validates :signature, presence: true
 
-  def initialize(attributes={})
+  def initialize(attributes = {})
     @name         = attributes[:name]
     @email        = attributes[:email]
     @work_site_id = attributes[:work_site_id]
@@ -31,11 +31,11 @@ class CheckInForm < ApplicationForm
     @shift ||= Shift.find_by(
       volunteer_id: volunteer,
       work_site_id: work_site,
-      day:          Date.today
+      day:          Time.zone.today
     ) || Shift.new(
       volunteer: volunteer,
       work_site: work_site,
-      day:       Date.today
+      day:       Time.zone.today
     )
   end
 
@@ -49,6 +49,6 @@ class CheckInForm < ApplicationForm
 
   def volunteer
     @volunteer ||= Volunteer.find_by(email: email) ||
-      Volunteer.new(name: name, email: email)
+                   Volunteer.new(name: name, email: email)
   end
 end

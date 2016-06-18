@@ -8,9 +8,9 @@ class CheckInsController < ApplicationController
     if check_in_form.valid?
       check_in_form.save
 
-      redirect_to work_site_path(work_site), notice: "Check in has been saved."
+      redirect_to work_site_path(work_site), notice: 'Check in has been saved.'
     else
-      render 'new', notice: "Check in is not valid"
+      render 'new', notice: 'Check in is not valid.'
     end
   end
 
