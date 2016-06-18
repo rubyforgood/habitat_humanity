@@ -15,6 +15,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'devise'
 gem 'administrate', '~> 0.1.4'
+gem 'materialize-sass'
 
 group :development, :test do
   gem 'byebug'
