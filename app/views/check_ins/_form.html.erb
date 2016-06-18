@@ -12,11 +12,12 @@
       <canvas class="Signature-pad"></canvas>
       <div class="Signature-footer">
           <div class="description">Sign above</div>
-          <%= f.text_field :signature, id: 'hidden' %>
-          <button type="button" class="Signature-button Signature-clear" data-action="clear">Clear</button>
-          <button type="button" class="Signature-button Signature-save" data-action="save">Save</button>
+          <%= f.hidden_field :signature, class: 'signature-field' %>
+          <button type="button" id="clear" class="Signature-button Signature-clear" data-action="clear">Clear</button>
+          <%= f.submit 'Save', class: 'submit' %>
         </div>
     </div>
+    <div class="text"></div>
   <p>
   </p>
 <% end %>
