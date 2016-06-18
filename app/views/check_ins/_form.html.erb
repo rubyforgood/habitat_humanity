@@ -1,0 +1,22 @@
+<%= form_for check_in_form, url: work_site_check_ins_path(work_site) do |f| %>
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </p>
+  <div class="Signature" id="Signature">
+      <canvas class="Signature-pad"></canvas>
+      <div class="Signature-footer">
+          <div class="description">Sign above</div>
+          <%= f.text_field :signature, id: 'hidden' %>
+          <button type="button" class="Signature-button Signature-clear" data-action="clear">Clear</button>
+          <button type="button" class="Signature-button Signature-save" data-action="save">Save</button>
+        </div>
+    </div>
+  <p>
+  </p>
+<% end %>

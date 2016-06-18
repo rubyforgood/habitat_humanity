@@ -1,4 +1,11 @@
 class ShiftEvent < ActiveRecord::Base
+  ACTIONS = %w(
+    start_shift
+    start_break
+    end_break
+    end_shift
+  ).freeze
+
   belongs_to :shift
 
   validates :shift,       presence: true
