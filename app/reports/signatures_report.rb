@@ -52,7 +52,8 @@ class SignaturesReport
                     'occurred_at',
                     'action',
                     'name',
-                    'email'].freeze
+                    'email',
+                    'signature'].freeze
 
   def to_csv
     join = pull_join
