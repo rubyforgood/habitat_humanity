@@ -15,5 +15,6 @@ RSpec.describe 'Checking in at a worksite', type: :feature do
     expect(Shift.count).to eq(1)
     expect(ShiftEvent.count).to eq(1)
     expect(Volunteer.count).to eq(1)
+    expect(ShiftEvent.first.action).to eq('start_shift')
   end
 end
