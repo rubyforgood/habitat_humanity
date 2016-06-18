@@ -35,18 +35,24 @@ body {
   margin-top: 0;
   padding: 1.5rem;
   background-color: $color-background;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .Signature {
   &-pad {
     border: 1px solid $color-text;
-    // width: 100%;
+    &-error {
+      border: 2px solid red;
+    }
   }
   &-button {
     background-color: $color-primary;
     &:hover {
       background-color: $color-accent;
     }
+  }
+  &-error {
+    font-weight: 800;
+    color: red;
   }
 }
