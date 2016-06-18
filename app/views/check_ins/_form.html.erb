@@ -1,42 +1,42 @@
 <%= form_for check_in_form, url: check_ins_path do |f| %>
-  <p>
+<p>
     <%= f.label :name %>
     <%= f.text_field :name %>
-  </p>
+</p>
 
-  <p>
+<p>
     <%= f.label :email %>
     <%= f.text_field :email %>
-  </p>
+</p>
 
-  <p>
+<p>
     <%= f.label :work_site_id %>
     <%= f.collection_select :work_site_id, work_sites, :id, :address %>
-  </p>
+</p>
 
-  <p>
+<p>
     <%= f.label :day %>
     <%= f.text_field :day %>
-  </p>
+</p>
 
-  <p>
+<p>
     <%= f.label :time %>
     <%= f.text_field :time %>
-  </p>
+</p>
 
-  <p>
+<p>
     <%= f.label :action %>
     <%= f.select :action, ShiftEvent::ACTIONS.collect { |key, value| [value, key] } %>
-  </p>
+</p>
 
-  <div class="Signature" id="Signature">
+<div class="description">Please sign here:</div>
+<div class="Signature" id="Signature">
     <canvas class="Signature-pad"></canvas>
     <div class="Signature-footer">
-      <div class="description">Sign above</div>
-      <%= f.hidden_field :signature, class: 'signature-field' %>
-      <button type="button" id="clear" class="Signature-button Signature-clear" data-action="clear">Clear</button>
-      <%= f.submit 'Save', class: 'submit' %>
+        <%= f.hidden_field :signature, class: 'signature-field' %>
+        <button type="button" id="clear" class="Signature-button Signature-clear waves-effect waves-light btn-large" data-action="clear">Clear</button>
+        <%= f.submit 'Save', class: 'Signature-button submit waves-effect waves-light btn-large' %>
     </div>
-  </div>
-  <div class="text"></div>
+</div>
+<div class="text"></div>
 <% end %>
