@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :work_sites
       resources :volunteers
       resources :shifts
+      resources :report_recipients
       # resources :shift_events ### not needed for this app
 
       root to: 'shifts#index'
