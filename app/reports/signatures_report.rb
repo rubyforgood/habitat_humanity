@@ -1,3 +1,5 @@
+require 'csv'
+
 class SignaturesReport
   attr_reader :begin, :end
 
@@ -23,23 +25,41 @@ class SignaturesReport
   end
 
   ##
-  # @return [Hash{Date=>Array<ActiveRecord::Base>}]
-  def data
-    # Might not want to include a date entry for days without any data
-    out = (self.begin..self.end).map { |date| [date, []] }.to_h
-
-    # Get the *actual* data
-    out.merge(data_pull.to_a.group_by(&:day))
-  end
-
-  ##
   # @private
   #
   # @return [ActiveRecord::Relation]
-  def data_pull
-    Shift.where(
-      'day BETWEEN :begin_date AND :end_date',
-      begin_date: @begin, end_date: @end
-    ).order(:day)
+  def pull_shifts
+    Shift
+      .where(
+        'day BETWEEN :begin_date AND :end_date',
+        begin_date: @begin, end_date: @end
+      )
+      .order(:day)
+  end
+
+  def pull_join
+    ShiftEvent
+      .joins(shift: [:work_site, :volunteer])
+      .where(
+        'day BETWEEN :begin_date AND :end_date',
+        begin_date: @begin, end_date: @end
+      )
+      .order(:occurred_at)
+  end
+
+  JOINED_HEADERS = [:address,
+                    :day,
+                    :occurred_at,
+                    :action,
+                    :name,
+                    :email].freeze
+
+  def to_csv
+    join = pull_join
+    CSV.generate(write_headers: true, headers: JOINED_HEADERS) do |csv|
+      join.each do |record|
+        csv << JOINED_HEADERS.map { |h| record[h] }
+      end
+    end
   end
 end

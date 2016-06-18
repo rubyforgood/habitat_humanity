@@ -12,7 +12,11 @@ RSpec.describe SignaturesReport, type: :report do
     expect(report.end - report.begin).to eq(6)
   end
 
-  it 'generates a hash for the covered days' do
-    expect(report.data.keys).to eq([*begin_date..end_date])
+  it 'generates CSV' do
+    FactoryGirl.create(:shift, :full, day: begin_date + 1)
+    round_trip = CSV.parse(report.to_csv)
+    expect(round_trip.size).to be > 1
+    expect(round_trip.first.size)
+      .to eq SignaturesReport::JOINED_HEADERS.size
   end
 end

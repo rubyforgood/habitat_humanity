@@ -8,25 +8,8 @@ class Shift < ActiveRecord::Base
   validates :day,       presence: true,
                         uniqueness: { scope: [:work_site_id, :volunteer_id] }
 
-  # WIP
-  validates_each :shift_events do |record, attr, value|
-    if !record.started? && value.action != 'start_shift'
-      # Disallow
-    end
-
-    if record.started? && value.action == 'start_shift'
-      # Disallow addition of attr...only allow modification of attr
-    end
-
-    if record.ended? && value.action == 'end_shift'
-      # Disallow
-    end
-
-    # Disallow more things
-  end
-
   def shift_start
-    shift_events.where(action: 'start_shift').first
+    shift_events.find_by(action: 'start_shift').first
   end
 
   def shift_end
