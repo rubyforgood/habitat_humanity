@@ -12,11 +12,7 @@ Rails.application.routes.draw do
     end
   end
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-  root to: 'work_sites#index'
+  root to: 'check_ins#new'
 
-  resources :work_sites, only: [:show] do
-    resources :check_ins, only: [:new, :create]
-  end
+  resources :check_ins, only: [:new, :create]
 end
