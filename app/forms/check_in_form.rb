@@ -1,7 +1,13 @@
 class CheckInForm
   include ActiveModel::Conversion
+  include ActiveModel::Validations
 
   attr_accessor :name, :email, :work_site_id, :signature
+
+  validates :name,      presence: true
+  validates :email,     presence: true
+  validates :work_site, presence: true
+  validates :signature, presence: true
 
   def initialize(attributes={})
     @name         = attributes[:name]
@@ -19,11 +25,9 @@ class CheckInForm
   end
 
   def save
+    volunteer.save!
+    shift.save!
     shift_event.save!
-  end
-
-  def valid?
-    volunteer.valid? && shift.valid? && shift_event.valid?
   end
 
   def work_site
@@ -39,7 +43,7 @@ class CheckInForm
       volunteer_id: volunteer,
       work_site_id: work_site,
       day:          Date.today
-    ) || Shift.create(
+    ) || Shift.new(
       volunteer: volunteer,
       work_site: work_site,
       day:       Date.today
@@ -56,6 +60,6 @@ class CheckInForm
 
   def volunteer
     @volunteer ||= Volunteer.find_by(email: email) ||
-      Volunteer.create(name: name, email: email)
+      Volunteer.new(name: name, email: email)
   end
 end
