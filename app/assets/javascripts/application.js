@@ -27,8 +27,6 @@ $(document).ready(function() {
     });
 
     $input = $('.datepicker').pickadate();
-
     picker = $input.pickadate('picker');
-
     picker.set('select', new Date());
 });
