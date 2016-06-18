@@ -20,8 +20,7 @@ class UserDashboard < Administrate::BaseDashboard
     current_sign_in_ip: Field::String.with_options(searchable: false),
     last_sign_in_ip: Field::String.with_options(searchable: false),
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    roles_mask: Field::Number
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -48,8 +47,7 @@ class UserDashboard < Administrate::BaseDashboard
     :current_sign_in_ip,
     :last_sign_in_ip,
     :created_at,
-    :updated_at,
-    :roles_mask
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
