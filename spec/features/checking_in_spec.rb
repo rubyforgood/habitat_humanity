@@ -8,6 +8,7 @@ RSpec.describe 'Checking in at a worksite', type: :feature do
     fill_in 'Name', with: 'Sam Jones'
     fill_in 'Email', with: 'my@email.com'
     select work_site.address, from: 'Work site'
+    select 'Start Shift', from: 'Action'
     fill_in 'Signature', with: 'abcdefg'
     click_button 'Check In'
 

@@ -1,15 +1,17 @@
 class CheckInForm < ApplicationForm
-  attr_accessor :name, :email, :work_site_id, :signature
+  attr_accessor :name, :email, :work_site_id, :action, :signature
 
   validates :name,      presence: true
   validates :email,     presence: true
   validates :work_site, presence: true
+  validates :action,    presence: true
   validates :signature, presence: true
 
   def initialize(attributes = {})
     @name         = attributes[:name]
     @email        = attributes[:email]
     @work_site_id = attributes[:work_site_id]
+    @action       = attributes[:action]
     @signature    = attributes[:signature]
   end
 
@@ -43,7 +45,7 @@ class CheckInForm < ApplicationForm
     @shift_event ||= shift.shift_events.build(
       occurred_at: Time.current,
       signature:   signature,
-      action:      'start_shift'
+      action:      action
     )
   end
 

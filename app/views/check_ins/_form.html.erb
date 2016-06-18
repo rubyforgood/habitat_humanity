@@ -14,6 +14,11 @@
     <%= f.collection_select :work_site_id, work_sites, :id, :address %>
   </p>
 
+  <p>
+    <%= f.label :action %>
+    <%= f.select :action, ShiftEvent::ACTIONS.collect { |key, value| [value, key] } %>
+  </p>
+
   <div class="Signature" id="Signature">
     <canvas class="Signature-pad"></canvas>
     <div class="Signature-footer">
