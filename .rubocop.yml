@@ -9,3 +9,6 @@ AllCops:
     - spec/factories/*
 Style/FrozenStringLiteralComment:
   Enabled: false
+Style/DoubleNegation:
+  Enabled: false
+

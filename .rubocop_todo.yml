@@ -23,3 +23,7 @@ Style/Documentation:
 
 Style/Documentation:
   Enabled: false
+
+Rails/FindBy:
+  Enabled: false
+
