@@ -7,17 +7,14 @@ Rails.application.routes.draw do
       resources :work_sites
       resources :volunteers
       resources :shifts
+      resources :report_recipients
       # resources :shift_events ### not needed for this app
 
       root to: 'shifts#index'
     end
   end
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-  root to: 'work_sites#index'
+  root to: 'check_ins#new'
 
-  resources :work_sites, only: [:show] do
-    resources :check_ins, only: [:new, :create]
-  end
+  resources :check_ins, only: [:new, :create]
 end

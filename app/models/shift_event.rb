@@ -1,10 +1,10 @@
 class ShiftEvent < ActiveRecord::Base
-  ACTIONS = %w(
-    start_shift
-    start_break
-    end_break
-    end_shift
-  ).freeze
+  ACTIONS = {
+    'start_shift' => 'Start Shift',
+    'start_break' => 'Start Break',
+    'end_break'   => 'End Break',
+    'end_shift'   => 'End Shift'
+  }.freeze
 
   belongs_to :shift
 

@@ -1,4 +1,4 @@
-<%= form_for check_in_form, url: work_site_check_ins_path(work_site) do |f| %>
+<%= form_for check_in_form, url: check_ins_path do |f| %>
   <p>
     <%= f.label :name %>
     <%= f.text_field :name %>
@@ -8,16 +8,35 @@
     <%= f.label :email %>
     <%= f.text_field :email %>
   </p>
-  <div class="Signature" id="Signature">
-      <canvas class="Signature-pad"></canvas>
-      <div class="Signature-footer">
-          <div class="description">Sign above</div>
-          <%= f.hidden_field :signature, class: 'signature-field' %>
-          <button type="button" id="clear" class="Signature-button Signature-clear" data-action="clear">Clear</button>
-          <%= f.submit 'Save', class: 'submit' %>
-        </div>
-    </div>
-    <div class="text"></div>
+
   <p>
+    <%= f.label :work_site_id %>
+    <%= f.collection_select :work_site_id, work_sites, :id, :address %>
   </p>
+
+  <p>
+    <%= f.label :day %>
+    <%= f.text_field :day %>
+  </p>
+
+  <p>
+    <%= f.label :time %>
+    <%= f.text_field :time %>
+  </p>
+
+  <p>
+    <%= f.label :action %>
+    <%= f.select :action, ShiftEvent::ACTIONS.collect { |key, value| [value, key] } %>
+  </p>
+
+  <div class="Signature" id="Signature">
+    <canvas class="Signature-pad"></canvas>
+    <div class="Signature-footer">
+      <div class="description">Sign above</div>
+      <%= f.hidden_field :signature, class: 'signature-field' %>
+      <button type="button" id="clear" class="Signature-button Signature-clear" data-action="clear">Clear</button>
+      <%= f.submit 'Save', class: 'submit' %>
+    </div>
+  </div>
+  <div class="text"></div>
 <% end %>
