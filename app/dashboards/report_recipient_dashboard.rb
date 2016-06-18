@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class ReportRecipientDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -12,7 +12,7 @@ class ReportRecipientDashboard < Administrate::BaseDashboard
     email: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-  }
+  }.freeze
 
   # COLLECTION_ATTRIBUTES
   # an array of attributes that will be displayed on the model's index page.
@@ -24,7 +24,7 @@ class ReportRecipientDashboard < Administrate::BaseDashboard
     :email,
     :created_at,
     :updated_at,
-  ]
+  ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
@@ -33,14 +33,14 @@ class ReportRecipientDashboard < Administrate::BaseDashboard
     :email,
     :created_at,
     :updated_at,
-  ]
+  ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :email,
-  ]
+  ].freeze
 
   # Overwrite this method to customize how report recipients are displayed
   # across all pages of the admin dashboard.
