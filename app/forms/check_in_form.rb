@@ -1,7 +1,4 @@
-class CheckInForm
-  include ActiveModel::Conversion
-  include ActiveModel::Validations
-
+class CheckInForm < ApplicationForm
   attr_accessor :name, :email, :work_site_id, :signature
 
   validates :name,      presence: true
@@ -14,14 +11,6 @@ class CheckInForm
     @email        = attributes[:email]
     @work_site_id = attributes[:work_site_id]
     @signature    = attributes[:signature]
-  end
-
-  def model_name
-    ActiveModel::Name.new(self.class, nil, self.class.name)
-  end
-
-  def persisted?
-    false
   end
 
   def save
