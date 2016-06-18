@@ -10,6 +10,5 @@ FactoryGirl.define do
     trait :site_supervisor do
       roles_mask 2
     end
-
   end
 end

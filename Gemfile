@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'devise'
 gem 'role_model'
+gem 'administrate', '~> 0.1.4'
 
 group :development, :test do
   gem 'byebug'
