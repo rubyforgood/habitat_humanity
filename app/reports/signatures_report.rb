@@ -47,19 +47,17 @@ class SignaturesReport
       .order(:occurred_at)
   end
 
-  JOINED_HEADERS = [:address,
-                    :day,
-                    :occurred_at,
-                    :action,
-                    :name,
-                    :email].freeze
+  JOINED_HEADERS = ['address',
+                    'day',
+                    'occurred_at',
+                    'action',
+                    'name',
+                    'email'].freeze
 
   def to_csv
     join = pull_join
     CSV.generate(write_headers: true, headers: JOINED_HEADERS) do |csv|
-      join.each do |record|
-        csv << JOINED_HEADERS.map { |h| record[h] }
-      end
+      join.each { |record| csv << record.attributes }
     end
   end
 end
