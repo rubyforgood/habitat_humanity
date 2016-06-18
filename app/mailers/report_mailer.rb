@@ -4,9 +4,8 @@ class ReportMailer < ApplicationMailer
   #
   #   en.report_mailer.weekly_email.subject
   #
-  def weekly_email
-    @greeting = 'Hi'
-
-    mail to: 'to@example.org'
+  def weekly_email(recipient)
+    @recipient = recipient
+    mail(to: @recipient.email, subject: 'Weekly Report')
   end
 end
