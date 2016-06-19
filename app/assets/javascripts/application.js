@@ -15,6 +15,5 @@
 //= require jquery_ujs
 //= require lolliclock
 //= require turbolinks
-
 //= require signature
 //= require_tree .
