@@ -46,6 +46,13 @@ class Shift < ActiveRecord::Base
     duration_without_breaks - breaks_duration
   end
 
+  ##
+  # @note
+  #   Warning: This method expects that every break in the shift has
+  #   exactly one start break event and exactly one end break event,
+  #   that the start break event precedes the end break event, and that
+  #   the breaks do not overlap each other or fall outside of the actual
+  #   shift.
   def breaks
     shift_events
       .select(:action, :occurred_at)
