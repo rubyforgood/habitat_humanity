@@ -12,8 +12,16 @@ class Shift < ActiveRecord::Base
     shift_events.find_by(action: 'start_shift')
   end
 
+  def shift_start_time
+    shift_start.occurred_at
+  end
+
   def shift_end
     shift_events.find_by(action: 'end_shift')
+  end
+
+  def shift_end_time
+    shift_end.occurred_at
   end
 
   def started?
@@ -22,5 +30,33 @@ class Shift < ActiveRecord::Base
 
   def ended?
     !!shift_end
+  end
+
+  def complete?
+    started? && ended?
+  end
+
+  def duration_without_breaks
+    return unless complete?
+
+    (shift_end.occurred_at - shift_start.occurred_at).seconds / 1.hour
+  end
+
+  def duration
+    duration_without_breaks - breaks_duration
+  end
+
+  def breaks
+    shift_events
+      .select(:action, :occurred_at)
+      .where(action: %w(start_break end_break))
+      .order(:occurred_at)
+      .each_slice(2)
+  end
+
+  def breaks_duration
+    breaks.map do |(start_break, end_break)|
+      end_break.occurred_at - start_break.occurred_at
+    end.inject(0.0, :+).seconds / 1.hour
   end
 end

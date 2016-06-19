@@ -36,7 +36,7 @@ module WeeklyReportable
       # Don't want to rely on `write_headers: true` since we want still
       # header row in the CSV file even when there is no data.
       csv << self.class::JOINED_HEADERS
-      pull_join.each { |record| csv << record.attributes }
+      pull_join.each { |record| csv << self.class::JOINED_HEADERS.map(&record.method(:send)) }
     end
   end
 
