@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   resources :check_ins, only: [:new, :create]
 
-  %i(signatures_report hours_report).each do |report|
+  %i(signatures_reports hours_reports).each do |report|
     resources report, only: [:index], defaults: { format: :csv }
   end
 end
