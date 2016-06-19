@@ -17,3 +17,20 @@
 //= require turbolinks
 //= require signature
 //= require_tree .
+
+$(document).ready(function() {
+  var $input, picker;
+
+  $('.datepicker').pickadate({
+      selectMonths: true,
+      selectYears: 15,
+      autoclose: true
+  });
+
+  $input = $('.datepicker').pickadate();
+  picker = $input.pickadate('picker');
+  picker.set('select', new Date());
+
+  $('#pick-a-time').lolliclock({autoclose:true});
+
+});

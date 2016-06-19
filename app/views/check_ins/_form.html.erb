@@ -1,42 +1,51 @@
-<%= form_for check_in_form, url: check_ins_path do |f| %>
-<p>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-</p>
-
-<p>
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-</p>
-
-<p>
-    <%= f.label :work_site_id %>
-    <%= f.collection_select :work_site_id, work_sites, :id, :address %>
-</p>
-
-<p>
-    <%= f.label :day %>
-    <%= f.text_field :day %>
-</p>
-
-<p>
-    <%= f.label :time %>
-    <%= f.text_field :time %>
-</p>
-
-<p>
-    <%= f.label :action %>
-    <%= f.select :action, ShiftEvent::ACTIONS.collect { |key, value| [value, key] } %>
-</p>
-
-<div class="Signature" id="Signature">
-  <div class="Signature-visable description">Please sign here:</div>
-    <canvas class="Signature-visable Signature-pad"></canvas>
-    <div class="Signature-footer">
-        <%= f.hidden_field :signature, class: 'signature-field' %>
-        <button type="button" id="clear" class="Signature-button Signature-clear waves-effect waves-light btn-large" data-action="clear">Clear</button>
-        <%= f.submit 'Save', class: 'Signature-button submit waves-effect waves-light btn-large' %>
+<div class='row'>
+  <%= form_for check_in_form, url: check_ins_path, html: { class: 'col s12' } do |f| %>
+    <div class="row">
+        <p>
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'input-field col s12' %>
+        </p>
     </div>
+    <div class='row'>
+        <p>
+            <%= f.label :email %>
+            <%= f.text_field :email, class: 'input-field col s12' %>
+        </p>
+    </div>
+    <div class="row">
+        <p>
+            <%= f.label :work_site_id %>
+            <%= f.collection_select :work_site_id, work_sites, :id, :address %>
+        </p>
+    </div>
+    <div class="row">
+        <p>
+            <%= f.label :day %>
+            <%= f.text_field :day, class: 'datepicker col s12' %>
+        </p>
+    </div>
+    <div class='row'>
+        <p>
+            <%= f.label :time %>
+            <%= f.text_field :time, id: 'pick-a-time', class: 'col s12' %>
+        </p>
+    </div>
+    <div class='row'>
+        <p>
+            <%= f.label :action %>
+            <%= f.select :action, ShiftEvent::ACTIONS.collect { |key, value| [value, key] } %>
+        </p>
+    </div>
+    <div class='row'>
+      <div class="Signature" id="Signature">
+        <div class="Signature-visible description">Please sign here:</div>
+          <canvas class="Signature-visable Signature-pad"></canvas>
+          <div class="Signature-footer">
+              <%= f.hidden_field :signature, class: 'signature-field' %>
+              <button type="button" id="clear" class="Signature-button Signature-clear waves-effect waves-light btn-large" data-action="clear">Clear</button>
+              <%= f.submit 'Save', class: 'Signature-button submit waves-effect waves-light btn-large' %>
+          </div>
+      </div>
+    </div>
+  <% end %>
 </div>
-<div class="text"></div>
-<% end %>
