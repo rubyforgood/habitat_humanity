@@ -39,4 +39,10 @@ module WeeklyReportable
       pull_join.each { |record| csv << record.attributes }
     end
   end
+
+  def csv_filename
+    "#{
+      self.class.name.demodulize.underscore.dasherize
+    } #{@begin.iso8601} to #{@end.iso8601}.csv"
+  end
 end
