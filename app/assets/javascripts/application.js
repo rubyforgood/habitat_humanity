@@ -33,4 +33,9 @@ $(document).ready(function() {
 
   $('#pick-a-time').lolliclock({autoclose:true});
 
+  $('#pick-a-time').click(function() {
+    $('#pick-a-time').blur()
+    // e.preventDefault();
+  })
+
 });
