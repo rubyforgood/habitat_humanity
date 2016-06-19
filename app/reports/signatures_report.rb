@@ -28,15 +28,6 @@ class SignaturesReport
   # @private
   #
   # @return [ActiveRecord::Relation]
-  def pull_shifts
-    Shift
-      .where(
-        'day BETWEEN :begin_date AND :end_date',
-        begin_date: @begin, end_date: @end
-      )
-      .order(:day)
-  end
-
   def pull_join
     ShiftEvent
       .joins(shift: [:work_site, :volunteer])
