@@ -10,6 +10,7 @@ class WorkSiteDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     address: Field::Text,
+    active: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -22,8 +23,8 @@ class WorkSiteDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :address,
-    :created_at,
-    :updated_at
+    :active,
+    :created_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -31,6 +32,7 @@ class WorkSiteDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :address,
+    :active,
     :created_at,
     :updated_at
   ].freeze
@@ -39,7 +41,8 @@ class WorkSiteDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :address
+    :address,
+    :active
   ].freeze
 
   # Overwrite this method to customize how work sites are displayed

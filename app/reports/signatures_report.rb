@@ -9,10 +9,9 @@ class SignaturesReport
   # @return [ActiveRecord::Relation]
   def pull_join
     ShiftEvent
-      .select(*ATTRIBUTE_HEADERS)
-      .joins(shift: [:work_site, :volunteer])
+      .includes(shift: [:work_site, :volunteer])
       .where(
-        'day BETWEEN :begin_date AND :end_date',
+        'occurred_at BETWEEN :begin_date AND :end_date',
         begin_date: @begin, end_date: @end
       ).order(:occurred_at)
   end
@@ -27,12 +26,24 @@ class SignaturesReport
 
   JOINED_HEADERS = ATTRIBUTE_HEADERS
 
+  # TODO
+  # rubocop: disable Metrics/AbcSize, Metrics/MethodLength
   def to_csv
     CSV.generate(write_headers: false, headers: self.class::JOINED_HEADERS) do |csv|
       # Don't want to rely on `write_headers: true` since we want still
       # header row in the CSV file even when there is no data.
-      csv << self.class::JOINED_HEADERS
-      pull_join.each { |record| csv << self.class::JOINED_HEADERS.map(&record.method(:send)) }
+      csv << JOINED_HEADERS
+      join.each do |record|
+        csv << [
+          record.shift.work_site.address,
+          record.shift.day,
+          record.occurred_at,
+          record.action,
+          record.shift.volunteer.name,
+          record.shift.volunteer.email,
+          record.signature
+        ]
+      end
     end
   end
 end
