@@ -31,15 +31,6 @@ module WeeklyReportable
     @end = Date.parse(end_date.to_s)
   end
 
-  def to_csv
-    CSV.generate(write_headers: false, headers: self.class::JOINED_HEADERS) do |csv|
-      # Don't want to rely on `write_headers: true` since we want still
-      # header row in the CSV file even when there is no data.
-      csv << self.class::JOINED_HEADERS
-      pull_join.each { |record| csv << self.class::JOINED_HEADERS.map(&record.method(:send)) }
-    end
-  end
-
   def csv_filename
     "#{
       self.class.name.demodulize.underscore.dasherize
