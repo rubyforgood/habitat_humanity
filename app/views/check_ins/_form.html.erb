@@ -1,3 +1,17 @@
+<% if flash[:notice] %>
+   <div class="notice"><%= flash[:notice] %></div>
+ <% end %>
+ <% if check_in_form.errors.any? %>
+  <div id="error_explanation">
+    <h5><%= pluralize(check_in_form.errors.count, "error") %> prohibited this shift event from being saved:</h5>
+
+    <ul>
+    <% check_in_form.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 <div class='row'>
   <%= form_for check_in_form, url: check_ins_path, html: { class: 'col s12' } do |f| %>
     <div class="row">

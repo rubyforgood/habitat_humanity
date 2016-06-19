@@ -28,6 +28,7 @@ class CheckInForm < ApplicationForm
     volunteer.save!
     shift.save!
     shift_event.save!
+    flash[:notice] = "Shift Event successfully created"
   end
 
   def work_site
