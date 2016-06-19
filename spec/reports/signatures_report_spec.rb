@@ -20,4 +20,34 @@ RSpec.describe SignaturesReport, type: :report do
     expect(round_trip.first.size)
       .to eq SignaturesReport::JOINED_HEADERS.size
   end
+
+  describe '#to_csv' do
+    before do
+      FactoryGirl.create(:work_site, address: '101 Broadway')
+      FactoryGirl.create(:shift, :full,
+                         day: begin_date + 1,
+                         work_site: WorkSite.first)
+    end
+    let(:round_trip) { CSV.parse(report.to_csv) }
+
+    it "each row includes a work_site's address" do
+      address_index = SignaturesReport::JOINED_HEADERS
+                      .index('address')
+      addresses = round_trip.map { |r| r[address_index] }
+      addresses.each_with_index do |address, i|
+        expect(address)
+          .not_to be_blank, "address #{i} blank (#{address.inspect})"
+      end
+    end
+
+    it "each row includes a volunteer's email address" do
+      email_index = SignaturesReport::JOINED_HEADERS
+                    .index('email')
+      emails = round_trip.map { |r| r[email_index] }
+      emails.each_with_index do |email, i|
+        expect(email)
+          .not_to be_blank, "email #{i} blank (#{email.inspect})"
+      end
+    end
+  end
 end
