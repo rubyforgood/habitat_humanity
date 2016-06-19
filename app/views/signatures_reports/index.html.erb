@@ -1,0 +1,17 @@
+<h1>Volunteer Signatures</h1>
+
+<h2><%= @begin_date %> - <%= @end_date %></h2>
+
+<table>
+  <tr>
+    <td>Signature!</td>
+  </tr>
+
+<% @shift_events.each do |event| %>
+  <tr>
+    <td><%= event.signature %></td>
+  </tr>
+<% end %>
+</table>
+
+<br>

@@ -17,5 +17,5 @@ Rails.application.routes.draw do
   root to: 'check_ins#new'
 
   resources :check_ins, only: [:new, :create]
-  resources :signatures_report, only: [:index], defaults: { format: :csv }
+  resources :signatures_reports, only: [:index]
 end
