@@ -17,5 +17,8 @@ Rails.application.routes.draw do
   root to: 'check_ins#new'
 
   resources :check_ins, only: [:new, :create]
-  resources :signatures_report, only: [:index], defaults: { format: :csv }
+
+  %i(signatures_report hours_report).each do |report|
+    resources report, only: [:index], defaults: { format: :csv }
+  end
 end
