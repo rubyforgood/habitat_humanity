@@ -16,15 +16,13 @@ class SignaturesReport
       ).order(:occurred_at)
   end
 
-  ATTRIBUTE_HEADERS = %w(address
-                         day
-                         occurred_at
-                         action
-                         name
-                         email
-                         signature).freeze
-
-  JOINED_HEADERS = ATTRIBUTE_HEADERS
+  JOINED_HEADERS = %w(address
+                      day
+                      occurred_at
+                      action
+                      name
+                      email
+                      signature).freeze
 
   # TODO
   # rubocop: disable Metrics/AbcSize, Metrics/MethodLength
