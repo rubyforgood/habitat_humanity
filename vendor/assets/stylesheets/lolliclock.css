@@ -21,7 +21,7 @@
   animation: open-popover 150ms forwards reverse cubic-bezier(0.4, 0, 0.2, 1);
 }
 .lolliclock-header {
-  background: #03a9f4;
+  background: #26A69A;
   height: 85px;
   width: 196px;
   display: flex;
@@ -153,16 +153,17 @@
   stroke-width: 1;
 }
 .lolliclock-canvas line {
-  stroke: #b3e5fc;
+  stroke: #7DCAC2;
   stroke-width: 1;
   stroke-linecap: round;
 }
 .lolliclock-canvas-fg {
   stroke: none;
-  fill: #0288d1;
+  fill: #26A69A;
 }
 .lolliclock-canvas-bg {
-  fill: rgba(3,169,244,0.25);
+  fill: rgba(125,202,194,0.5);
+  /*RGBA(125, 202, 194, 1.00)*/
 }
 .lolliclock-tick {
   border-radius: 100%;
@@ -178,7 +179,7 @@
 }
 .lolliclock-tick.active,
 .lolliclock-tick:hover {
-  background: #b3e5fc;
+  background: #7DCAC2;
 }
 .lolliclock-ampm-block {
   display: flex;
@@ -223,7 +224,7 @@
   color: #212121;
 }
 .lolliclock-active-button-background {
-  background-color: #03a9f4;
+  background-color: #26A69A;
   border-radius: 100%;
   transition: transform 175ms;
   transform: scale(1);
