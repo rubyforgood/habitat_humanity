@@ -7,7 +7,7 @@ RSpec.describe SignaturesReport, type: :report do
   let(:report) { SignaturesReport.for_week(ending: end_date) }
 
   it 'instantiates a report based on the end of the week' do
-    # TODO Should this be refactored now that this helper logic has been
+    # TODO: Should this be refactored now that this helper logic has been
     # extracted into WeeklyReportable?
     expect(report.begin).to eq(begin_date)
     expect(report.end).to eq(end_date)
@@ -15,7 +15,7 @@ RSpec.describe SignaturesReport, type: :report do
   end
 
   it 'generates CSV' do
-    # TODO Should this be refactored now that this helper logic has been
+    # TODO: Should this be refactored now that this helper logic has been
     # extracted into WeeklyReportable?
 
     # Create a shift inside our weekly report period

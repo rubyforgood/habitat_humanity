@@ -8,7 +8,7 @@ class HoursReport
   #
   # @return [ActiveRecord::Relation]
   def pull_join
-    # TODO Have yet to get a Railsy query working here
+    # TODO: Have yet to get a Railsy query working here
     Shift
       .includes(:work_site, :volunteer, :shift_events)
       .where(day: @begin..@end)
@@ -25,6 +25,8 @@ class HoursReport
                       duration
                       duration_without_breaks).freeze
 
+  # TODO
+  # rubocop: disable Metrics/MethodLength
   def to_csv
     CSV.generate(write_headers: false, headers: JOINED_HEADERS) do |csv|
       # Don't want to rely on `write_headers: true` since we want still

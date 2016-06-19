@@ -32,8 +32,6 @@ module WeeklyReportable
   end
 
   def csv_filename
-    "#{
-      self.class.name.demodulize.underscore.dasherize
-    } #{@begin.iso8601} to #{@end.iso8601}.csv"
+    "#{self.class.name.demodulize.underscore.dasherize} #{@begin.iso8601} to #{@end.iso8601}.csv"
   end
 end
