@@ -36,7 +36,8 @@ body {
   margin-top: 0;
   padding: 1.5rem;
   background-color: $color-background;
-  min-height: 100vh;
+  // min-height: 100vh;
+  max-width: 80%;
 }
 
 .description p {

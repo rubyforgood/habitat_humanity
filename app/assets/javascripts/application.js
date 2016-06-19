@@ -23,7 +23,8 @@ $(document).ready(function() {
 
   $('.datepicker').pickadate({
       selectMonths: true,
-      selectYears: 15
+      selectYears: 15,
+      autoclose: true
   });
 
   $input = $('.datepicker').pickadate();
