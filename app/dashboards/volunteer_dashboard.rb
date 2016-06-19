@@ -48,7 +48,7 @@ class VolunteerDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how volunteers are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(volunteer)
-  #   "Volunteer ##{volunteer.id}"
-  # end
+  def display_resource(volunteer)
+    volunteer.email
+  end
 end
