@@ -1,4 +1,4 @@
-class HoursReportController < ApplicationController
+class HoursReportsController < ApplicationController
   before_action :authenticate_user!
 
   def index
