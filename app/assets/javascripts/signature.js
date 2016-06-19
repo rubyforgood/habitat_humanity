@@ -1,5 +1,7 @@
 //= require signature_pad
 $( document ).ready(function() {
+  $('select').material_select();
+
   var wrapper = document.getElementById("Signature"),
       clearButton = document.getElementById("clear"),
       saveButton = wrapper.querySelector("[data-action=save]"),
