@@ -31,7 +31,7 @@ class SignaturesReport
       # Don't want to rely on `write_headers: true` since we want still
       # header row in the CSV file even when there is no data.
       csv << JOINED_HEADERS
-      join.each do |record|
+      pull_join.each do |record|
         csv << [
           record.shift.work_site.address,
           record.shift.day,
