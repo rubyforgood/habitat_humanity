@@ -28,7 +28,7 @@ $( document ).ready(function() {
   });
 
   $('#new_check_in_form').submit(function(e) {
-    if ($('.signature-field').val('')) {
+    if ($('.signature-field').val() != 'N/A' && signaturePad.isEmpty()) {
       $('.Signature-pad').addClass('Signature-pad-error');
       $('.description').addClass('Signature-error');
       return false;
