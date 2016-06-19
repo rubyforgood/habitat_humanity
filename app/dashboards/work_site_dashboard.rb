@@ -48,7 +48,7 @@ class WorkSiteDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how work sites are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(work_site)
-  #   "WorkSite ##{work_site.id}"
-  # end
+  def display_resource(work_site)
+    work_site.address
+  end
 end
