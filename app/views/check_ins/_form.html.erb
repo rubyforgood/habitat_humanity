@@ -29,9 +29,9 @@
     <%= f.select :action, ShiftEvent::ACTIONS.collect { |key, value| [value, key] } %>
 </p>
 
-<div class="description">Please sign here:</div>
 <div class="Signature" id="Signature">
-    <canvas class="Signature-pad"></canvas>
+  <div class="Signature-visable description">Please sign here:</div>
+    <canvas class="Signature-visable Signature-pad"></canvas>
     <div class="Signature-footer">
         <%= f.hidden_field :signature, class: 'signature-field' %>
         <button type="button" id="clear" class="Signature-button Signature-clear waves-effect waves-light btn-large" data-action="clear">Clear</button>

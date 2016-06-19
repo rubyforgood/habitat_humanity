@@ -41,6 +41,7 @@ body {
 .Signature {
   &-pad {
     border: 1px solid $color-text;
+    margin-bottom: 1rem;
     &-error {
       border: 2px solid red;
     }
@@ -54,5 +55,8 @@ body {
   &-error {
     font-weight: 800;
     color: red;
+  }
+  &-sup {
+      color: black;
   }
 }
