@@ -19,14 +19,17 @@
 //= require_tree .
 
 $(document).ready(function() {
-    var $input, picker;
+  var $input, picker;
 
-    $('.datepicker').pickadate({
-        selectMonths: true,
-        selectYears: 15
-    });
+  $('.datepicker').pickadate({
+      selectMonths: true,
+      selectYears: 15
+  });
 
-    $input = $('.datepicker').pickadate();
-    picker = $input.pickadate('picker');
-    picker.set('select', new Date());
+  $input = $('.datepicker').pickadate();
+  picker = $input.pickadate('picker');
+  picker.set('select', new Date());
+
+  $('#pick-a-time').lolliclock({autoclose:true});
+
 });
