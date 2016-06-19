@@ -12,7 +12,7 @@ RSpec.describe 'Checking in at a worksite', type: :feature do
     fill_in 'Email', with: 'my@email.com'
     select work_site.address, from: 'Work site'
     fill_in 'Day',  with: '1 January, 2016'
-    fill_in 'Time', with: '4:30 PM'
+    fill_in 'pick-a-time', with: '4:30 PM'
     select 'Start Shift', from: 'Action'
     find(:css, '#check_in_form_signature', visible: false).set 'my signature'
     click_button 'Save'
