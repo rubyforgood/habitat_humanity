@@ -56,7 +56,7 @@ class SignaturesReport
                       signature).freeze
 
   # TODO
-  # rubocop: disable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop: disable Metrics/MethodLength
   def to_csv
     join = pull_join
     CSV.generate(write_headers: false, headers: JOINED_HEADERS) do |csv|
