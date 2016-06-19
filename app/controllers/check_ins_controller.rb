@@ -1,6 +1,6 @@
 class CheckInsController < ApplicationController
   expose(:check_in_form) { CheckInForm.new check_in_params }
-  expose(:work_sites)    { WorkSite.all }
+  expose(:work_sites)    { WorkSite.active }
 
   def create
     if check_in_form.valid?
