@@ -14,20 +14,21 @@
  *= require_self
  */
 
+
 @import "materialize";
 @import "lolliclock";
 
 // colors
-  $color-primary: #8BB6D1; // light blue
-  $color-text: #005596; // dark blue
-  $color-background: #fff; // white
-  $color-accent: #6CC568; // green
+$color-primary: #005F99; // blue
+$color-text: #222; // dark grey
+$color-background: #fff; // white
 
 #hidden {
   display: none;
 }
 
 body {
+  color: $color-text;
   background-color: $color-primary;
 }
 
@@ -38,7 +39,12 @@ body {
   min-height: 100vh;
 }
 
+.description p {
+  font-size: 1.25rem;
+}
+
 .Signature {
+  text-align: center;
   &-pad {
     border: 1px solid $color-text;
     margin-bottom: 1rem;
@@ -51,7 +57,6 @@ body {
 .btn-large {
   background-color: $color-primary;
   &:hover {
-    background-color: $color-accent;
   }
   &-error {
     font-weight: 800;
