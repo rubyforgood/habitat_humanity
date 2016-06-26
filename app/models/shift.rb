@@ -8,6 +8,9 @@ class Shift < ActiveRecord::Base
   validates :day,       presence: true,
                         uniqueness: { scope: [:work_site_id, :volunteer_id] }
 
+  delegate :address, to: :work_site
+  delegate :name, :email, to: :volunteer, prefix: true
+
   def shift_start
     shift_events.find_by(action: 'start_shift')
   end

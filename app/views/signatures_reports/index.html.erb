@@ -14,11 +14,11 @@
 
 <% @shift_events.each do |event| %>
   <tr>
-    <td><%= event.shift.work_site.address %></td>
-    <td><%= event.shift.day %></td>
+    <td><%= event.address %></td>
+    <td><%= event.day %></td>
     <td><%= event.occurred_at.strftime("%I:%M%p") %></td>
     <td><%= event.action %></td>
-    <td><%= event.shift.volunteer.email %></td>
+    <td><%= event.volunteer_email %></td>
     <td><img src='<%= event.signature %>' /></td>
   </tr>
 <% end %>

@@ -37,7 +37,7 @@ RSpec.describe SignaturesReport, type: :report do
 
     it "each row includes a work_site's address" do
       address_index = SignaturesReport::JOINED_HEADERS
-                      .index('address')
+                      .index(:address)
       addresses = round_trip.map { |r| r[address_index] }
       addresses.each_with_index do |address, i|
         expect(address)
@@ -47,7 +47,7 @@ RSpec.describe SignaturesReport, type: :report do
 
     it "each row includes a volunteer's email address" do
       email_index = SignaturesReport::JOINED_HEADERS
-                    .index('email')
+                    .index(:volunteer_email)
       emails = round_trip.map { |r| r[email_index] }
       emails.each_with_index do |email, i|
         expect(email)
