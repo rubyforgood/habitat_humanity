@@ -16,31 +16,21 @@ class SignaturesReport
       ).order(:occurred_at)
   end
 
-  JOINED_HEADERS = %w(address
+  JOINED_HEADERS = %i(address
                       day
                       occurred_at
                       action
-                      name
-                      email
+                      volunteer_name
+                      volunteer_email
                       signature).freeze
 
-  # TODO
-  # rubocop: disable Metrics/MethodLength
   def to_csv
     CSV.generate(write_headers: false, headers: self.class::JOINED_HEADERS) do |csv|
       # Don't want to rely on `write_headers: true` since we want still
       # header row in the CSV file even when there is no data.
       csv << JOINED_HEADERS
       pull_join.each do |record|
-        csv << [
-          record.shift.work_site.address,
-          record.shift.day,
-          record.occurred_at,
-          record.action,
-          record.shift.volunteer.name,
-          record.shift.volunteer.email,
-          record.signature
-        ]
+        csv << JOINED_HEADERS.map { |field| record.public_send(field) }
       end
     end
   end
