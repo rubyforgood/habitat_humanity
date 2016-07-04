@@ -47,3 +47,8 @@ group :red_green_refactor, halt_on_fail: true do
     watch(%r{(?:.+\/)?\.rubocop_todo\.yml$}) { |m| File.dirname(m[0]) }
   end
 end
+
+guard 'rails', server: :webrick do
+  watch('Gemfile.lock')
+  watch(%r{^(config|lib)/.*})
+end
