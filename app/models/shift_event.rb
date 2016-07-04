@@ -12,5 +12,5 @@ class ShiftEvent < ActiveRecord::Base
   validates :action,      presence: true, inclusion: { in: ACTIONS }
   validates :occurred_at, presence: true
 
-  delegate :address, :day, :volunteer_name, :volunteer_email, to: :shift
+  delegate :address, :day, :volunteer_name, :volunteer_email, :minor, to: :shift
 end

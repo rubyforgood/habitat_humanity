@@ -17,7 +17,7 @@ class CheckInsController < ApplicationController
 
   def check_in_params
     params.fetch(:check_in_form, {}).permit(
-      :name, :email, :work_site_id, :day, :time, :action, :signature
+      :name, :email, :work_site_id, :day, :time, :action, :signature, :minor
     )
   end
 

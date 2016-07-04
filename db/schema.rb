@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160619135958) do
+ActiveRecord::Schema.define(version: 20160704025807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,11 +34,12 @@ ActiveRecord::Schema.define(version: 20160619135958) do
   add_index "shift_events", ["shift_id"], name: "index_shift_events_on_shift_id", using: :btree
 
   create_table "shifts", force: :cascade do |t|
-    t.integer  "work_site_id", null: false
-    t.integer  "volunteer_id", null: false
-    t.date     "day",          null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "work_site_id",                 null: false
+    t.integer  "volunteer_id",                 null: false
+    t.date     "day",                          null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "minor",        default: false, null: false
   end
 
   add_index "shifts", ["volunteer_id"], name: "index_shifts_on_volunteer_id", using: :btree
