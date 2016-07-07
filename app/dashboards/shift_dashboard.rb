@@ -12,6 +12,7 @@ class ShiftDashboard < Administrate::BaseDashboard
     volunteer: Field::BelongsTo,
     id: Field::Number,
     day: Field::DateTime,
+    minor: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -25,7 +26,8 @@ class ShiftDashboard < Administrate::BaseDashboard
     :work_site,
     :volunteer,
     :id,
-    :day
+    :day,
+    :minor
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,6 +37,7 @@ class ShiftDashboard < Administrate::BaseDashboard
     :volunteer,
     :id,
     :day,
+    :minor,
     :created_at,
     :updated_at
   ].freeze
@@ -45,7 +48,8 @@ class ShiftDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :work_site,
     :volunteer,
-    :day
+    :day,
+    :minor
   ].freeze
 
   # Overwrite this method to customize how shifts are displayed

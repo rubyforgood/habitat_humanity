@@ -22,6 +22,7 @@ class SignaturesReport
                       action
                       volunteer_name
                       volunteer_email
+                      minor
                       signature).freeze
 
   def to_csv
