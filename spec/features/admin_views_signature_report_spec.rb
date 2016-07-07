@@ -63,5 +63,8 @@ feature 'Admins can view the volunteer signature report', type: :feature do
   # Given I am not signed in as an admin
   # When I visit the volunteer signature report page
   # Then I am redirected to the sign in page
-  scenario 'when the visitor is not an admin'
+  scenario 'when the visitor is not an admin' do
+    visit '/signatures_reports'
+    expect(current_path).to eq new_user_session_path
+  end
 end
