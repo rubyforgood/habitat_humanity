@@ -3,8 +3,9 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 gem 'rails', '~> 4.2.6'
-gem 'rails_12factor'
 gem 'pg', '~> 0.18.4'
+
+gem 'rails_12factor', group: :production
 
 gem 'decent_exposure', '~> 2.3.3'
 gem 'reform',          '~> 2.1.0'
