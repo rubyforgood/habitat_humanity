@@ -4,8 +4,15 @@ class ReportMailer < ApplicationMailer
   #
   #   en.report_mailer.weekly_email.subject
   #
-  def weekly_email(recipient)
-    @recipient = recipient
-    mail(to: @recipient.email, subject: 'Weekly Report')
+  default to: Proc.new { ReportRecipient.pluck(:email) },
+          from: 'communications@habitat-nola.org'
+
+  def weekly_email
+    @end_date = Date.tomorrow
+    @report = SignaturesReport.for_week(ending: @end_date)
+    @report.pull_join
+
+    attachments['WeeklyReport.csv'] = @report.to_csv
+    mail(subject: 'Weekly Report')
   end
 end
