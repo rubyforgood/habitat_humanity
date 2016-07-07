@@ -30,6 +30,7 @@ end
 
 group :test do
   gem 'capybara', '~> 2.7.1'
+  gem 'timecop',  '~> 0.8.1'
 end
 
 group :development do

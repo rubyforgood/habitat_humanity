@@ -13,7 +13,7 @@
   </tr>
 
 <% @shift_events.each do |event| %>
-  <tr>
+  <tr class="entry">
     <td><%= event.address %></td>
     <td><%= event.day %></td>
     <td><%= event.occurred_at.strftime("%I:%M%p") %></td>
