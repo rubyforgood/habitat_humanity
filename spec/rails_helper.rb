@@ -5,9 +5,11 @@ require File.expand_path('../../config/environment', __FILE__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'support/controller_helpers'
-require 'support/tasks'
+require 'support/tasks'          # includes rake tasks in tagged example groups
+require 'support/console_output' # redirects console output to dev/null in tests
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -30,7 +32,8 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :controller
-  config.include ControllerHelpers, type: :controller
+  config.include ControllerHelpers,   type: :controller
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
