@@ -10,6 +10,7 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'materialize-sass'
 gem 'pg', '~> 0.18.4'
+gem 'rails_12factor', group: :production
 gem 'reform', '~> 2.1.0'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks'

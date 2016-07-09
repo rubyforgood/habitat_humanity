@@ -4,7 +4,8 @@ class CheckInForm < ApplicationForm
   COMBINED_FORMAT = "#{DATE_FORMAT} #{TIME_FORMAT}".freeze
   SHIFT_ACTIONS   = %w(start_shift end_shift).freeze
 
-  attr_accessor :name, :email, :work_site_id, :day, :time, :action, :signature
+  attr_accessor :name, :email, :work_site_id, :day, :time, :action, :signature,
+                :minor
 
   validates :name,      presence: true
   validates :email,     presence: true
@@ -22,6 +23,7 @@ class CheckInForm < ApplicationForm
     @time         = attributes[:time] || Time.current.strftime(TIME_FORMAT)
     @action       = attributes[:action]
     @signature    = attributes[:signature]
+    @minor        = attributes[:minor]
   end
 
   def save
@@ -58,6 +60,7 @@ class CheckInForm < ApplicationForm
     ) || Shift.new(
       volunteer: volunteer,
       work_site: work_site,
+      minor:     minor,
       day:       shift_day
     )
   end

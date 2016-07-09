@@ -20,6 +20,7 @@ class HoursReport
                       day
                       volunteer_name
                       volunteer_email
+                      minor
                       shift_start_time
                       shift_end_time
                       duration
