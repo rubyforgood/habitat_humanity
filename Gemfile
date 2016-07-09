@@ -9,8 +9,8 @@ gem 'decent_exposure', '~> 2.3.3'
 gem 'devise'
 gem 'jquery-rails'
 gem 'materialize-sass'
-gem 'pg',    '~> 0.18.4'
-gem 'reform',          '~> 2.1.0'
+gem 'pg', '~> 0.18.4'
+gem 'reform', '~> 2.1.0'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
@@ -24,10 +24,6 @@ group :development, :test do
   gem 'rubocop'
 end
 
-group :test do
-  gem 'capybara', '~> 2.7.1'
-end
-
 group :development do
   gem 'guard'
   gem 'guard-rspec', require: false
@@ -36,4 +32,8 @@ group :development do
   gem 'pry-rails'
   gem 'spring'
   gem 'web-console', '~> 2.0'
+end
+
+group :test do
+  gem 'capybara', '~> 2.7.1'
 end
