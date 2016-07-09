@@ -4,7 +4,7 @@ class ReportMailer < ApplicationMailer
   #
   #   en.report_mailer.weekly_email.subject
   #
-  default to: Proc.new { ReportRecipient.pluck(:email) },
+  default to: proc { ReportRecipient.pluck(:email) },
           from: 'communications@habitat-nola.org'
 
   def weekly_email

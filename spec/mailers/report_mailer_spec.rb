@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ReportMailer, type: :mailer do
   describe 'weekly_email' do
-    before do 
+    before do
       ReportRecipient.first || ReportRecipient.create(email: 'from@example.com')
     end
 
