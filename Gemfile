@@ -29,8 +29,8 @@ group :development do
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'guard-rubocop', require: false
-  gem 'pry-doc'
   gem 'pry-rails'
+  gem 'pry-doc'
   gem 'spring'
   gem 'web-console', '~> 2.0'
 end
