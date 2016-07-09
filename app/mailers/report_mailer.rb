@@ -9,7 +9,7 @@ class ReportMailer < ApplicationMailer
 
   def weekly_email
     @end_date = Date.tomorrow
-    @report = SignaturesReport.for_week(ending: @end_date)
+    @report = HoursReport.for_week(ending: @end_date)
     @report.pull_join
 
     attachments['WeeklyReport.csv'] = @report.to_csv
