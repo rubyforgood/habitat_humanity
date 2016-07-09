@@ -5,7 +5,7 @@ class ReportMailer < ApplicationMailer
   #   en.report_mailer.weekly_email.subject
   #
   default to: proc { ReportRecipient.pluck(:email) },
-          from: 'communications@habitat-nola.org'
+          from: ENV['WEEKLY_REPORT_FROM'] || 'communications@habitat-nola.org'
 
   def weekly_email
     @end_date = Date.tomorrow
