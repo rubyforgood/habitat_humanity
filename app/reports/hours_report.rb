@@ -1,4 +1,5 @@
-require_relative 'concerns/weekly_reportable'
+require 'concerns/weekly_reportable'
+require 'csv_report_generator'
 
 class HoursReport
   include WeeklyReportable
@@ -26,14 +27,24 @@ class HoursReport
                       duration
                       duration_without_breaks).freeze
 
+  ##
+  # @return [String]  The generated CSV for the configured begin/end date
   def to_csv
-    CSV.generate(write_headers: false, headers: JOINED_HEADERS) do |csv|
-      # Don't want to rely on `write_headers: true` since we want still
-      # header row in the CSV file even when there is no data.
-      csv << JOINED_HEADERS
-      pull_join.each do |record|
-        csv << JOINED_HEADERS.map { |field| record.public_send(field) }
-      end
-    end
+    csv_report_generator = CSVReportGenerator.new method_names: JOINED_HEADERS,
+                                                  records: pull_join
+    csv_report_generator.generate_report
+  end
+
+  ##
+  # @return [String]  The filename for the generated CSV
+  def csv_filename
+    "#{report_title} #{begin_date.iso8601} to #{end_date.iso8601}.csv"
+  end
+
+  private
+
+  # Returns the report title to be used in the csv filename
+  def report_title
+    self.class.name.demodulize.underscore.dasherize
   end
 end
