@@ -5,8 +5,9 @@ feature 'Admins can view the volunteer signature report', type: :feature do
   # to the created events.
   def generate_entries(n, dates: [])
     n.times do |i|
-      date = dates[i] || Faker::Time.between(1.minute.ago, 1.week.ago)
-      create(:shift_event, occurred_at: date)
+      date = dates[i].to_date || Faker::Date.before(1.week.ago)
+      shift = create(:shift, day: date)
+      create(:shift_event, shift: shift)
     end
   end
 

@@ -17,7 +17,7 @@ class SignaturesReport
       .includes(shift: [:work_site, :volunteer])
       .where(
         'occurred_at BETWEEN :begin_date AND :end_date',
-        begin_date: @begin, end_date: @end
+        begin_date: @begin, end_date: @end + 1.day
       ).order(:occurred_at)
   end
 
