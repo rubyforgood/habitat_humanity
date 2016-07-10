@@ -1,6 +1,4 @@
 class ShiftEvent < ActiveRecord::Base
-  include ActiveModel::Validations
-
   ACTIONS = {
     'start_shift' => 'Start Shift',
     'start_break' => 'Start Break',
