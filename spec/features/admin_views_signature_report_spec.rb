@@ -37,6 +37,7 @@ feature 'Admins can view the volunteer signature report', type: :feature do
     expect(current_path).to eq '/signatures_reports'
     expect(page).to have_content 'Volunteer Signatures'
 
+    # FIXME: random failures (find 1 instead of 2)
     expect(all('.entry').count).to eq(2)
   end
 
@@ -79,20 +80,62 @@ feature 'Admins can view the volunteer signature report', type: :feature do
   # Given I am a signed-in site admin
   # When I set the end date to precede the start date
   # Then I see an error message
-  # And I see a list of volunteer actions for the past week
-  scenario 'when the end date precedes the start date'
+  # Then I see a notice that no data is found for the date range
+  scenario 'when the end date precedes the start date' do
+    start_date = 20.days.ago.to_date
+    end_date = 40.days.ago.to_date
+    
+    sign_in_as_admin
+    visit '/signatures_reports'
+    within 'form#set_date_range' do
+      fill_in 'Begin date', with: start_date.to_s
+      fill_in 'End date',   with: end_date.to_s
+    end
+    click_button 'Generate'
+
+    expect(page).to have_css '.alert-error'
+    expect(page).to have_content 'Invalid date range'
+    expect(page).to have_content 'No data for this date range'
+  end
+    
 
   # Given I am a signed-in site admin
   # When I set the end date in the future
-  # Then I see an error message
   # Then I see a list of volunteer actions for the start date through today
-  scenario 'when the end date is in the future'
+  scenario 'when the end date is in the future' do
+    generate_entries(2, dates: [6.days.ago, 2.days.ago])
+    start_date = 4.days.ago.to_date
+    end_date = 5.days.from_now.to_date
+    
+    sign_in_as_admin
+    visit '/signatures_reports'
+    within 'form#set_date_range' do
+      fill_in 'Begin date', with: start_date.to_s
+      fill_in 'End date',   with: end_date.to_s
+    end
+    click_button 'Generate'
+
+    expect(all('.entry').count).to eq(1)
+  end
 
   # Given I am a signed-in site admin
   # When I set the start date in the future
-  # Then I see an error message
-  # And I see a list of volunteer actions for the past week
-  scenario 'when the start date is in the future'
+  # Then I see a notice that no data is found for the date range
+  scenario 'when the start date is in the future' do
+    generate_entries(2, dates: [6.days.ago, 5.days.ago])
+    start_date = 5.days.from_now.to_date
+    end_date = 10.days.from_now.to_date
+    
+    sign_in_as_admin
+    visit '/signatures_reports'
+    within 'form#set_date_range' do
+      fill_in 'Begin date', with: start_date.to_s
+      fill_in 'End date',   with: end_date.to_s
+    end
+    click_button 'Generate'
+    
+    expect(page).to have_content 'No data for this date range'
+  end
 
   # Given I am not signed in as an admin
   # When I visit the volunteer signature report page
