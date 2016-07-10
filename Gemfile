@@ -31,6 +31,7 @@ group :development do
   gem 'guard-rubocop', require: false
   gem 'pry-rails'
   gem 'pry-doc'
+  gem 'rails-footnotes', '~> 4.0'
   gem 'spring'
   gem 'web-console', '~> 2.0'
 end
