@@ -36,8 +36,11 @@ body {
   margin-top: 0;
   padding: 1.5rem;
   background-color: $color-background;
-  // min-height: 100vh;
-  max-width: 80%;
+  width: 100%;
+  max-width: 100%;
+  @media only screen and (min-width: 400px)  {
+    max-width: 80%;
+  }
 }
 
 .description p {
@@ -47,8 +50,11 @@ body {
 .Signature {
   text-align: center;
   &-pad {
+    display: block;
     border: 1px solid $color-text;
     margin-bottom: 1rem;
+    width: 100%;
+    max-height: 20rem;
     &-error {
       border: 2px solid red;
     }

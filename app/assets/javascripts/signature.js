@@ -27,6 +27,17 @@ $( document ).ready(function() {
       signaturePad.clear();
   });
 
+  function resizeCanvas() {
+    var ratio =  Math.max(window.devicePixelRatio || 1, 1);
+    canvas.width = canvas.offsetWidth * ratio;
+    canvas.height = canvas.offsetHeight * ratio;
+    canvas.getContext("2d").scale(ratio, ratio);
+    signaturePad.clear(); // otherwise isEmpty() might return incorrect value
+}
+
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
   $('#new_check_in_form').submit(function(e) {
     if ($('.signature-field').val() != 'N/A' && signaturePad.isEmpty()) {
       $('.Signature-pad').addClass('Signature-pad-error');
