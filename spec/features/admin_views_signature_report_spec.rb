@@ -84,7 +84,7 @@ feature 'Admins can view the volunteer signature report', type: :feature do
   scenario 'when the end date precedes the start date' do
     start_date = 20.days.ago.to_date
     end_date = 40.days.ago.to_date
-    
+
     sign_in_as_admin
     visit '/signatures_reports'
     within 'form#set_date_range' do
@@ -97,7 +97,6 @@ feature 'Admins can view the volunteer signature report', type: :feature do
     expect(page).to have_content 'Invalid date range'
     expect(page).to have_content 'No data for this date range'
   end
-    
 
   # Given I am a signed-in site admin
   # When I set the end date in the future
@@ -106,7 +105,7 @@ feature 'Admins can view the volunteer signature report', type: :feature do
     generate_entries(2, dates: [6.days.ago, 2.days.ago])
     start_date = 4.days.ago.to_date
     end_date = 5.days.from_now.to_date
-    
+
     sign_in_as_admin
     visit '/signatures_reports'
     within 'form#set_date_range' do
@@ -125,7 +124,7 @@ feature 'Admins can view the volunteer signature report', type: :feature do
     generate_entries(2, dates: [6.days.ago, 5.days.ago])
     start_date = 5.days.from_now.to_date
     end_date = 10.days.from_now.to_date
-    
+
     sign_in_as_admin
     visit '/signatures_reports'
     within 'form#set_date_range' do
@@ -133,7 +132,7 @@ feature 'Admins can view the volunteer signature report', type: :feature do
       fill_in 'End date',   with: end_date.to_s
     end
     click_button 'Generate'
-    
+
     expect(page).to have_content 'No data for this date range'
   end
 

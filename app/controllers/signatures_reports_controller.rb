@@ -9,9 +9,7 @@ class SignaturesReportsController < ApplicationController
     @begin_date   = parse_date params[:begin_date], default: (@end_date - 6.days)
 
     if valid_date_range?
-      @shift_events = SignaturesReport
-                      .for_date_range(beginning: @begin_date, ending: @end_date)
-                      .pull_join
+      @shift_events = shift_events_for_range(@begin_date, @end_date)
     else
       flash[:error] = 'Invalid date range. Begin date must precede the end date.'
       @shift_events = []
@@ -19,7 +17,13 @@ class SignaturesReportsController < ApplicationController
   end
 
   private
-  
+
+  def shift_events_for_range(begin_date, end_date)
+    SignaturesReport
+      .for_date_range(beginning: begin_date, ending: end_date)
+      .pull_join
+  end
+
   def valid_date_range?
     @begin_date < @end_date
   end
