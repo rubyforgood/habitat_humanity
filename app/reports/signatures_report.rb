@@ -1,7 +1,12 @@
-require_relative 'concerns/weekly_reportable'
+require 'concerns/weekly_reportable'
+require 'csv_report_generator'
 
 class SignaturesReport
   include WeeklyReportable
+
+  def initialize
+    @csv_report_generator = CSVReportGenerator.new method_names: JOINED_HEADERS
+  end
 
   ##
   # @private
@@ -16,6 +21,19 @@ class SignaturesReport
       ).order(:occurred_at)
   end
 
+  ##
+  # @return [String]  The generated CSV for the configured begin/end date
+  def to_csv
+    csv_report_generator.records = pull_join
+    csv_report_generator.generate_report
+  end
+
+  ##
+  # @return [String]  The filename for the generated CSV
+  def csv_filename
+    "#{report_title} #{begin_date.iso8601} to #{end_date.iso8601}.csv"
+  end
+
   JOINED_HEADERS = %i(address
                       day
                       occurred_at
@@ -25,14 +43,12 @@ class SignaturesReport
                       minor
                       signature).freeze
 
-  def to_csv
-    CSV.generate(write_headers: false, headers: self.class::JOINED_HEADERS) do |csv|
-      # Don't want to rely on `write_headers: true` since we want still
-      # header row in the CSV file even when there is no data.
-      csv << JOINED_HEADERS
-      pull_join.each do |record|
-        csv << JOINED_HEADERS.map { |field| record.public_send(field) }
-      end
-    end
+  private
+
+  attr_reader :csv_report_generator
+
+  # Returns the report title to be used in the csv filename
+  def report_title
+    self.class.name.demodulize.underscore.dasherize
   end
 end
