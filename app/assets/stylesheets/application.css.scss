@@ -50,6 +50,7 @@ body {
 .Signature {
   text-align: center;
   &-pad {
+    display: block;
     border: 1px solid $color-text;
     margin-bottom: 1rem;
     width: 100%;
