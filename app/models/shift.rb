@@ -1,7 +1,7 @@
 class Shift < ActiveRecord::Base
   belongs_to :work_site
   belongs_to :volunteer
-  has_many   :shift_events
+  has_many   :shift_events, dependent: :destroy
 
   validates :work_site, presence: true
   validates :volunteer, presence: true
