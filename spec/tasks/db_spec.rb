@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'db', :task do
   describe 'seed' do
@@ -8,7 +8,7 @@ describe 'db', :task do
     end
   end
 
-  describe 'initialize_admin' do
+  describe 'initialize_admin', :mute_output do
     subject { Rake::Task['db:initialize_admin'] }
     it 'should create a new admin user' do
       expect { subject.invoke }.to change { User.count }.from(0).to(1)

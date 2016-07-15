@@ -11,31 +11,43 @@
 // about supported directives.
 //
 //= require jquery
-//= require materialize-sprockets
 //= require jquery_ujs
+//= require materialize-sprockets
 //= require lolliclock
-//= require turbolinks
 //= require signature
+//= require turbolinks
 //= require_tree .
 
-$(document).ready(function() {
-  var $input, picker;
+(function ($) {
+  var ready, eventsToBind;
 
-  $('.datepicker').pickadate({
-      selectMonths: true,
-      selectYears: 15,
-      autoclose: true
+  ready = function () {
+    var $input, picker;
+
+    // Initialize all datepickers
+    $('.datepicker').pickadate({
+        selectMonths: true,
+        selectYears: 15,
+        autoclose: true
+    });
+
+    // Initialize the datepicker on the sign-in form
+    $input = $('#sign_in_form_day').pickadate();
+    picker = $input.pickadate('picker');
+    picker.set('select', new Date());
+
+    // Initialize time picker
+    $('#pick-a-time').lolliclock({ autoclose:true });
+
+    $('#pick-a-time').click(function() {
+      $('#pick-a-time').blur();
+      // e.preventDefault();
+    });
+  };
+
+  // Fix for turbolinks + jquery bugs
+  eventsToBind = ['ready', 'page:load', 'page:update'];
+  eventsToBind.forEach(function (event) {
+    $(document).on(event, ready);
   });
-
-  $input = $('.datepicker').pickadate();
-  picker = $input.pickadate('picker');
-  picker.set('select', new Date());
-
-  $('#pick-a-time').lolliclock({autoclose:true});
-
-  $('#pick-a-time').click(function() {
-    $('#pick-a-time').blur()
-    // e.preventDefault();
-  })
-
-});
+}($));

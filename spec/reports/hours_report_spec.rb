@@ -3,20 +3,20 @@ require 'rails_helper'
 RSpec.describe HoursReport, type: :report do
   let(:end_date_string) { '2016-05-09' }
   let(:end_date) { Date.parse(end_date_string) }
-  let(:begin_date) { end_date - 6 }
+  let(:begin_date) { end_date - 6.days }
   let(:report) { HoursReport.for_week(ending: end_date) }
 
   it 'instantiates a report based on the end of the week' do
     # TODO: Should this be refactored now that this helper logic has been
     # extracted into WeeklyReportable?
-    expect(report.begin).to eq(begin_date)
-    expect(report.end).to eq(end_date)
-    expect(report.end - report.begin).to eq(6)
+    expect(report.begin_date).to eq(begin_date)
+    expect(report.end_date).to eq(end_date)
+    expect(report.end_date - report.begin_date).to eq(6)
   end
 
   it 'generates CSV' do
     # Create a shift inside our weekly report period
-    FactoryGirl.create(:shift, :full, day: begin_date + 1)
+    FactoryGirl.create(:shift, :full, day: begin_date + 1.day)
     round_trip = CSV.parse(report.to_csv)
     expect(round_trip.size).to be > 1
     expect(round_trip.first.size)
@@ -27,7 +27,7 @@ RSpec.describe HoursReport, type: :report do
     before do
       FactoryGirl.create(:work_site, address: '101 Broadway')
       FactoryGirl.create(:shift, :full,
-                         day: begin_date + 1,
+                         day: begin_date + 1.day,
                          work_site: WorkSite.first)
     end
     let(:round_trip) { CSV.parse(report.to_csv) }

@@ -10,7 +10,12 @@
     <body>
 
         <div class='container col s10 m12'>
+            <%= render 'flash_messages' %>
             <%= yield %>
+            
+            <%# Show Rails Footnotes in development for
+                application performance insight %>
+            <%= content_tag(:div, '', id: 'footnotes_holder') if Rails.env.development? %>
         </div>
     </body>
 </html>

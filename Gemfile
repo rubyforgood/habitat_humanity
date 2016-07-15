@@ -31,10 +31,12 @@ group :development do
   gem 'guard-rubocop', require: false
   gem 'pry-rails'
   gem 'pry-doc'
+  gem 'rails-footnotes', '~> 4.0'
   gem 'spring'
   gem 'web-console', '~> 2.0'
 end
 
 group :test do
   gem 'capybara', '~> 2.7.1'
+  gem 'timecop',  '~> 0.8.1'
 end
