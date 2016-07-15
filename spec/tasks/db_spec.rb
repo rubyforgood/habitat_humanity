@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'db', :task do
-  describe 'seed' do
+  describe 'seed', :mute_output do
     subject { Rake::Task['db:seed'] }
     it 'should be valid' do
       expect { subject.invoke }.not_to raise_error

@@ -7,12 +7,12 @@ require 'spec_helper'
 require 'rspec/rails'
 
 # Add additional requires below this line. Rails is not loaded until this point!
-require 'support/helpers/controller'
-require 'support/helpers/feature'
+require 'support/helpers/controller_helpers'
+require 'support/helpers/feature_helpers'
 
 require 'support/factory_girl'
-require 'support/tasks'          # includes rake tasks in tagged example groups
-require 'support/console_output' # redirects console output to dev/null in tests
+require 'support/tasks'               # includes rake tasks in tagged example groups
+require 'support/mute_console_output' # redirects console output to dev/null
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
