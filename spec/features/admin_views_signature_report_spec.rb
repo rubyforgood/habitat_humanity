@@ -1,43 +1,20 @@
 require 'rails_helper'
 
 feature 'Admins can view the volunteer signature report', type: :feature do
-  # Creates n shift events. If dates is specified, it assigns the listed dates
-  # to the created events.
-  def generate_entries(n, dates: [])
-    n.times do |i|
-      date = dates[i].to_date || Faker::Date.before(1.week.ago)
-      shift = create(:shift, day: date)
-      create(:shift_event, shift: shift)
-    end
-  end
-
-  # Creates a user account and signs the user in. Used for setup for
-  # administrative specs.
-  def sign_in_as_admin
-    create(:user, email: 'admin@example.com', password: 'password')
-    visit '/users/sign_in'
-    within 'form#new_user' do
-      fill_in 'Email', with: 'admin@example.com'
-      fill_in 'Password', with: 'password'
-    end
-    click_button 'Log in'
-  end
-
-  before { Timecop.freeze Time.zone.local(1592, 3, 14, 6, 53) }
+  before { Timecop.freeze Time.zone.parse('July 24, 1969, 16:50:35 UTC') }
   after { Timecop.return }
 
   # Given I am a signed-in site admin
   # When I visit the volunteer signature report page
   # Then I see a list of volunteer actions for the past week
   scenario 'when an admin visits the page' do
-    generate_entries(3, dates: [1.second.ago, 5.days.ago, 1.month.ago]) # test outer limits
+    generate_entries dates: [Time.zone.today, 5.days.ago, 1.month.ago]
 
     sign_in_as_admin
     visit '/signatures_reports'
     expect(current_path).to eq '/signatures_reports'
     expect(page).to have_content 'Volunteer Signatures'
 
-    # FIXME: random failures (find 1 instead of 2)
     expect(all('.entry').count).to eq(2)
   end
 
@@ -45,7 +22,7 @@ feature 'Admins can view the volunteer signature report', type: :feature do
   # When I set the start and end dates to valid values
   # Then I see a list of volunteer actions for the given date range
   scenario 'when the start and end dates are specified' do
-    generate_entries(2, dates: [25.days.ago, 50.days.ago])
+    generate_entries(dates: [25.days.ago, 50.days.ago])
     start_date = 40.days.ago.to_date
     end_date = 20.days.ago.to_date
 
@@ -102,7 +79,7 @@ feature 'Admins can view the volunteer signature report', type: :feature do
   # When I set the end date in the future
   # Then I see a list of volunteer actions for the start date through today
   scenario 'when the end date is in the future' do
-    generate_entries(2, dates: [6.days.ago, 2.days.ago])
+    generate_entries(dates: [6.days.ago, 2.days.ago])
     start_date = 4.days.ago.to_date
     end_date = 5.days.from_now.to_date
 
@@ -121,7 +98,7 @@ feature 'Admins can view the volunteer signature report', type: :feature do
   # When I set the start date in the future
   # Then I see a notice that no data is found for the date range
   scenario 'when the start date is in the future' do
-    generate_entries(2, dates: [6.days.ago, 5.days.ago])
+    generate_entries(dates: [6.days.ago, 5.days.ago])
     start_date = 5.days.from_now.to_date
     end_date = 10.days.from_now.to_date
 

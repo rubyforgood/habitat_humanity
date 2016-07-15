@@ -13,12 +13,13 @@ class SignaturesReport
   #
   # @return [ActiveRecord::Relation]
   def pull_join
+    start_time = @begin.in_time_zone.beginning_of_day
+    end_time   = @end.in_time_zone.end_of_day
+
     ShiftEvent
       .includes(shift: [:work_site, :volunteer])
-      .where(
-        'occurred_at BETWEEN :begin_date AND :end_date',
-        begin_date: @begin, end_date: @end + 1.day
-      ).order(:occurred_at)
+      .where(occurred_at: start_time..end_time)
+      .order(:occurred_at)
   end
 
   ##

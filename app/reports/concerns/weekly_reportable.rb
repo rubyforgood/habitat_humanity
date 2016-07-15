@@ -25,11 +25,21 @@ module WeeklyReportable
     #
     # @return [SignaturesReport]
     def for_week(ending:)
-      end_date   = Date.parse ending.to_s
-      begin_date = end_date - 6
+      end_date   = ending.to_date
+      begin_date = end_date - 6.days
       new_with_date_range(begin_date, end_date)
     end
 
+    ##
+    # Returns a signatures report containing data for the specified date range
+    #
+    # @param beginning [String,Date]
+    #   Date or String parseable as a Date
+    #
+    # @param ending [String,Date]
+    #   Date or String parseable as a Date
+    #
+    # @return [SignaturesReport]
     def for_date_range(beginning:, ending:)
       new_with_date_range(beginning, ending)
     end
@@ -43,8 +53,10 @@ module WeeklyReportable
     end
   end
 
+  ##
+  # Sets the begin/end date ivars to the specified begin/end dates
   def set_date_range(begin_date, end_date)
-    @begin = Date.parse begin_date.to_s
-    @end   = Date.parse end_date.to_s
+    @begin = begin_date.to_date
+    @end   = end_date.to_date
   end
 end
