@@ -13,8 +13,8 @@ class SignaturesReport
   #
   # @return [ActiveRecord::Relation]
   def pull_join
-    start_time = @begin.in_time_zone.beginning_of_day
-    end_time   = @end.in_time_zone.end_of_day
+    start_time = begin_date.in_time_zone.beginning_of_day
+    end_time   = end_date.in_time_zone.end_of_day
 
     ShiftEvent
       .includes(shift: [:work_site, :volunteer])

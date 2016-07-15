@@ -12,7 +12,7 @@ class HoursReport
     # TODO: Have yet to get a Railsy query working here
     Shift
       .includes(:work_site, :volunteer, :shift_events)
-      .where(day: @begin..@end)
+      .where(day: begin_date..end_date)
       .order(:day)
       .select(&:complete?)
   end

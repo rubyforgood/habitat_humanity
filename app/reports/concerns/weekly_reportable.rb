@@ -9,10 +9,9 @@ module WeeklyReportable
   extend ActiveSupport::Concern
 
   included do
-    # TODO: this should probably change to non-reseved words
     # TODO: doesn't fit with the module name (allows for more control than just
     #       weekly reports); change module name?
-    attr_reader :begin, :end
+    attr_reader :begin_date, :end_date
   end
 
   class_methods do
@@ -56,7 +55,7 @@ module WeeklyReportable
   ##
   # Sets the begin/end date ivars to the specified begin/end dates
   def set_date_range(begin_date, end_date)
-    @begin = begin_date.to_date
-    @end   = end_date.to_date
+    @begin_date = begin_date.to_date
+    @end_date   = end_date.to_date
   end
 end
