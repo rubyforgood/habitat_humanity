@@ -1,16 +1,12 @@
 require 'active_support/concern'
-require 'csv'
-require 'date_input'
 
 ##
 # Contains an interface to limit the date range of a report.
 #
-module WeeklyReportable
+module DateLimitable
   extend ActiveSupport::Concern
 
   included do
-    # TODO: doesn't fit with the module name (allows for more control than just
-    #       weekly reports); change module name?
     attr_reader :begin_date, :end_date
   end
 
@@ -19,10 +15,8 @@ module WeeklyReportable
     # Returns a signatures report containing data for the week ending on the
     # specified end date
     #
-    # @param ending [String,Date]
-    #   Date or String parseable as a Date
-    #
-    # @return [SignaturesReport]
+    # @param ending [#to_date]  End date for week
+    # @return [DateLimitable]
     def for_week(ending:)
       end_date   = ending.to_date
       begin_date = end_date - 6.days
@@ -30,21 +24,19 @@ module WeeklyReportable
     end
 
     ##
-    # Returns a signatures report containing data for the specified date range
+    # Returns a new DateLimitable containing data for the specified date range
     #
-    # @param beginning [String,Date]
-    #   Date or String parseable as a Date
-    #
-    # @param ending [String,Date]
-    #   Date or String parseable as a Date
-    #
-    # @return [SignaturesReport]
+    # @param  beginning [#to_date]  Start of date range
+    # @param  ending [#to_date]     End of date range
+    # @return [DateLimitable]
     def for_date_range(beginning:, ending:)
       new_with_date_range(beginning, ending)
     end
 
     private
 
+    ##
+    # Returns a new DateLimitable with the given date range
     def new_with_date_range(begin_date, end_date)
       report = new
       report.set_date_range(begin_date, end_date)

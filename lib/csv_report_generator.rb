@@ -1,3 +1,5 @@
+require 'csv'
+
 # Generates a CSV report given a set of headers and records. Each record must
 # respond to the methods represented by the headers.
 class CSVReportGenerator

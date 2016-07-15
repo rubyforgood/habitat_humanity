@@ -1,21 +1,9 @@
-require 'concerns/weekly_reportable'
-require 'csv_report_generator'
+require 'concerns/date_limitable'
+require 'concerns/csv_generatable'
 
 class HoursReport
-  include WeeklyReportable
-
-  ##
-  # @private
-  #
-  # @return [ActiveRecord::Relation]
-  def pull_join
-    # TODO: Have yet to get a Railsy query working here
-    Shift
-      .includes(:work_site, :volunteer, :shift_events)
-      .where(day: begin_date..end_date)
-      .order(:day)
-      .select(&:complete?)
-  end
+  include DateLimitable
+  include CSVGeneratable
 
   JOINED_HEADERS = %i(address
                       day
@@ -28,11 +16,22 @@ class HoursReport
                       duration_without_breaks).freeze
 
   ##
-  # @return [String]  The generated CSV for the configured begin/end date
-  def to_csv
-    csv_report_generator = CSVReportGenerator.new method_names: JOINED_HEADERS,
-                                                  records: pull_join
-    csv_report_generator.generate_report
+  # Required for CSVGeneratable
+  def csv_headers
+    JOINED_HEADERS
+  end
+
+  ##
+  # @private
+  #
+  # @return [ActiveRecord::Relation]
+  def pull_join
+    # TODO: Have yet to get a Railsy query working here
+    Shift
+      .includes(:work_site, :volunteer, :shift_events)
+      .where(day: begin_date..end_date)
+      .order(:day)
+      .select(&:complete?)
   end
 
   ##
