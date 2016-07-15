@@ -4,7 +4,6 @@ class SignaturesReportsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    params.delete(:commit) # clean url param list
     @end_date     = parse_date params[:end_date],   default: Time.zone.today
     @begin_date   = parse_date params[:begin_date], default: (@end_date - 6.days)
 

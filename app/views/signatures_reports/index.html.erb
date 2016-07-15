@@ -4,14 +4,14 @@
   <div class="row">
     <div class="col s12 m4">
       <%= label_tag :begin_date %>
-      <%= date_field_tag :begin_date, @begin_date, class: 'datepicker' %>
+      <%= date_field_tag :begin_date, @begin_date.strftime('%e %B, %Y'), class: 'datepicker' %>
     </div>
     <div class="col s12 m4">
       <%= label_tag :end_date %>
-      <%= date_field_tag :end_date, @end_date, class: 'datepicker' %>
+      <%= date_field_tag :end_date, @end_date.strftime('%e %B, %Y'), class: 'datepicker' %>
     </div>
     <div class="col s12 m4">
-      <%= submit_tag 'Generate', class: 'waves-effect waves-light btn-large' %>
+      <%= submit_tag 'Generate', name: nil, class: 'waves-effect waves-light btn-large' %>
     </div>
   </div>
 <% end %>
@@ -41,5 +41,3 @@
 <% else %>
   <h5>No data for this date range</h5>
 <% end %>
-
-<br>
