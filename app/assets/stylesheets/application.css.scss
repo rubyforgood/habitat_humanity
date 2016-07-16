@@ -39,8 +39,13 @@ $color-background: #fff; // white
   @extend .white-text;
 }
 
-.alert-info, .alert-alert {
+.alert-info {
   @extend .blue;
+  @extend .white-text;
+}
+
+.alert-alert {
+  @extend .orange;
   @extend .white-text;
 }
 
