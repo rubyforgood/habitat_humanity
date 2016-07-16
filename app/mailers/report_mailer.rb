@@ -13,6 +13,8 @@ class ReportMailer < ApplicationMailer
     @report.pull_join
 
     attachments['WeeklyReport.csv'] = @report.to_csv
-    mail(subject: 'Weekly Report')
+    email = mail(subject: 'Weekly Report')
+    raise 'there are no recipients' if email[:to].addresses.empty?
+    email
   end
 end
