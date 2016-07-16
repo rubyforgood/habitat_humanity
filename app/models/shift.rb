@@ -69,4 +69,12 @@ class Shift < ActiveRecord::Base
       end_break.occurred_at - start_break.occurred_at
     end.inject(0.0, :+).seconds / 1.hour
   end
+
+  def signature_in
+    shift_start.try(:signature)
+  end
+
+  def signature_out
+    shift_end.try(:signature)
+  end
 end

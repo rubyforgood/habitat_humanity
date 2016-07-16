@@ -13,7 +13,9 @@ class HoursReport
                       shift_start_time
                       shift_end_time
                       duration
-                      duration_without_breaks).freeze
+                      duration_without_breaks
+                      signature_in
+                      signature_out).freeze
 
   ##
   # Required for CSVGeneratable
