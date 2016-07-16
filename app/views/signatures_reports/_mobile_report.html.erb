@@ -1,0 +1,22 @@
+<div class="hide-on-med-and-up">
+  <p>
+    This is an abbreviated report meant for mobile use.
+    To see full report, please view on desktop.
+  </p>
+  
+  <table>
+    <tr>
+      <td>Work Site</td>
+      <td>Volunteer</td>
+      <td>Action</td>
+    </tr>
+  
+  <% @shift_events.each do |event| %>
+    <tr class="mobile-entry">
+      <td><%= event.address %></td>
+      <td><%= event.volunteer_name %></td>
+      <td><%= event.action %></td>
+    </tr>
+  <% end %>
+  </table>
+</div>

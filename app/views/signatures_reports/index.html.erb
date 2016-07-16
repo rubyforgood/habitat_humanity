@@ -17,27 +17,8 @@
 <% end %>
 
 <% if @shift_events.any? %>
-  <table>
-    <tr>
-      <td>Work Site</td>
-      <td>Day</td>
-      <td>Time</td>
-      <td>Action</td>
-      <td>Volunteer</td>
-      <td>Signature!</td>
-    </tr>
-
-  <% @shift_events.each do |event| %>
-    <tr class="entry">
-      <td><%= event.address %></td>
-      <td><%= event.occurred_at.to_date %></td>
-      <td><%= event.occurred_at.strftime("%I:%M%p") %></td>
-      <td><%= event.action %></td>
-      <td><%= event.volunteer_email %></td>
-      <td><img src='<%= event.signature %>' /></td>
-    </tr>
-  <% end %>
-  </table>
+  <%= render 'desktop_report' %>
+  <%= render 'mobile_report' %>
 <% else %>
   <h5>No data for this date range</h5>
 <% end %>
