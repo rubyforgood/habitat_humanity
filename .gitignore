@@ -16,3 +16,6 @@
 !/log/.keep
 /tmp
 .ruby-version
+
+# Ignore environment variables
+.env
