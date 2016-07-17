@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   scope :admin do
     resource :signatures_report, only: [:show]
-    resource :hours_report,      only: [:index], defaults: { format: :csv }
+    resource :hours_report,      only: [:show], defaults: { format: :csv }
   end
 
   # unavailable if user is not authenticated
