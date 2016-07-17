@@ -14,7 +14,7 @@ module FeatureHelpers
   # administrative specs.
   def sign_in_as_admin
     create(:user, email: 'admin@example.com', password: 'password')
-    visit '/users/sign_in'
+    visit new_user_session_path
     within 'form#new_user' do
       fill_in 'Email', with: 'admin@example.com'
       fill_in 'Password', with: 'password'

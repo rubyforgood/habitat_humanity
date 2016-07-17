@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, skip: [:registrations]
+  devise_for :users, skip: [:registrations], path: ''
 
   # redirects to login page if user is not authenticated
   authenticate :user do
@@ -14,15 +14,17 @@ Rails.application.routes.draw do
     end
   end
 
+  scope :admin do
+    resource :signatures_report, only: [:show]
+    resource :hours_report,      only: [:index], defaults: { format: :csv }
+  end
+
   # unavailable if user is not authenticated
   authenticated :user do
     root to: 'admin/shifts#index', as: :authenticated_root
   end
 
   resources :check_ins, only: [:new, :create]
-
-  resources :signatures_reports, only: [:index]
-  resources :hours_reports,      only: [:index], defaults: { format: :csv }
 
   root to: 'check_ins#new'
 end
