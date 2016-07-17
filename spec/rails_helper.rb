@@ -67,4 +67,8 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   srand config.seed
+
+  # Use PhantomJS to test JavaScript
+  require 'capybara/poltergeist'
+  Capybara.javascript_driver = :poltergeist
 end
