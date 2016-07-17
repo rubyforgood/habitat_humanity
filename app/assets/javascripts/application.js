@@ -34,7 +34,7 @@
     // Initialize the datepicker on the sign-in form
     $input = $('#sign_in_form_day').pickadate();
     picker = $input.pickadate('picker');
-    picker.set('select', new Date());
+    if (picker) { picker.set('select', new Date()); }
 
     // Initialize time picker
     $('#pick-a-time').lolliclock({ autoclose:true });
