@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Shift do
+RSpec.describe Shift, type: :model do
   describe '#destroy' do
     it 'removes all related ShiftEvents' do
       shift = FactoryGirl.create(:shift, :full)

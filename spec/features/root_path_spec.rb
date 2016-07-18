@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Root path directs user to the appropriate page' do
+feature 'Root path directs user to the appropriate page', type: :feature do
   # Given I am a signed-in user
   # When I visit the root path
   # Then I should see an admin dashboard with a link to the check in form

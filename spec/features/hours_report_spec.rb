@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Admin can download hours report', :feature do
+feature 'Admin can download hours report', type: :feature do
   scenario 'as an admin' do
     sign_in_as_admin
     visit hours_report_path(format: :csv)
