@@ -15,5 +15,19 @@ module Admin
 
     # See https://administrate-docs.herokuapp.com/customizing_controller_actions
     # for more information
+
+    def activate
+      resource = WorkSite.find params[:work_site_id]
+      resource.activate!
+      flash[:success] = "#{resource.address} successfully activated"
+      redirect_to admin_work_sites_path
+    end
+
+    def deactivate
+      resource = WorkSite.find params[:work_site_id]
+      resource.deactivate!
+      flash[:success] = "#{resource.address} successfully deactivated"
+      redirect_to admin_work_sites_path
+    end
   end
 end
