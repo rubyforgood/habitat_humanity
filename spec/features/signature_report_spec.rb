@@ -11,8 +11,8 @@ feature 'Admins can view the volunteer signature report', type: :feature do
     generate_entries dates: [Time.zone.today, 5.days.ago, 1.month.ago]
 
     sign_in_as_admin
-    visit '/signatures_reports'
-    expect(current_path).to eq '/signatures_reports'
+    visit signatures_report_path
+    expect(current_path).to eq '/admin/signatures_report'
     expect(page).to have_content 'Volunteer Signatures'
 
     expect(all('.entry').count).to eq(2)
@@ -30,7 +30,7 @@ feature 'Admins can view the volunteer signature report', type: :feature do
     formatted_valid_date = 25.days.ago.to_date.to_s
 
     sign_in_as_admin
-    visit '/signatures_reports'
+    visit signatures_report_path
     within 'form#set_date_range' do
       fill_in 'Begin date', with: start_date.to_s
       fill_in 'End date',   with: end_date.to_s
@@ -47,7 +47,7 @@ feature 'Admins can view the volunteer signature report', type: :feature do
   # Then I see a notice that no data is found for the date range
   scenario 'when there is no data for the selected range' do
     sign_in_as_admin
-    visit '/signatures_reports'
+    visit signatures_report_path
 
     expect(page).not_to have_css '.entry'
     expect(page).not_to have_content 'Work Site'
@@ -63,7 +63,7 @@ feature 'Admins can view the volunteer signature report', type: :feature do
     end_date = 40.days.ago.to_date
 
     sign_in_as_admin
-    visit '/signatures_reports'
+    visit signatures_report_path
     within 'form#set_date_range' do
       fill_in 'Begin date', with: start_date.to_s
       fill_in 'End date',   with: end_date.to_s
@@ -84,7 +84,7 @@ feature 'Admins can view the volunteer signature report', type: :feature do
     end_date = 5.days.from_now.to_date
 
     sign_in_as_admin
-    visit '/signatures_reports'
+    visit signatures_report_path
     within 'form#set_date_range' do
       fill_in 'Begin date', with: start_date.to_s
       fill_in 'End date',   with: end_date.to_s
@@ -103,7 +103,7 @@ feature 'Admins can view the volunteer signature report', type: :feature do
     end_date = 10.days.from_now.to_date
 
     sign_in_as_admin
-    visit '/signatures_reports'
+    visit signatures_report_path
     within 'form#set_date_range' do
       fill_in 'Begin date', with: start_date.to_s
       fill_in 'End date',   with: end_date.to_s
@@ -117,7 +117,7 @@ feature 'Admins can view the volunteer signature report', type: :feature do
   # When I visit the volunteer signature report page
   # Then I am redirected to the sign in page
   scenario 'when the visitor is not an admin' do
-    visit '/signatures_reports'
+    visit signatures_report_path
     expect(current_path).to eq new_user_session_path
   end
 end

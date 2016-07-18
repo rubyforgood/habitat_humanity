@@ -6,10 +6,11 @@ class CheckInsController < ApplicationController
     if check_in_form.valid?
       check_in_form.save
 
-      redirect_to new_check_in_path(current_work_site_params),
-                  notice: 'Check in has been saved.'
+      flash[:success] = 'Check in has been saved.'
+      redirect_to new_check_in_path(current_work_site_params)
     else
-      render 'new', notice: 'Check in is not valid.'
+      flash[:error] = 'Check in is not valid.'
+      render 'new'
     end
   end
 

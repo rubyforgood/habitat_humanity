@@ -12,7 +12,7 @@ class ShiftEventDashboard < Administrate::BaseDashboard
     id: Field::Number,
     action: Field::String,
     occurred_at: Field::DateTime,
-    signature: Field::Text,
+    signature: RawImageField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze

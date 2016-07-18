@@ -26,10 +26,26 @@ $color-background: #fff; // white
 // flash alerts
 .alert {
   margin: -1.5rem;
+  margin-bottom: 1rem;
 }
 
 .alert-error {
   @extend .red;
+  @extend .white-text;
+}
+
+.alert-success {
+  @extend .green;
+  @extend .white-text;
+}
+
+.alert-info, .alert-notice {
+  @extend .blue;
+  @extend .white-text;
+}
+
+.alert-alert, .alert-warning {
+  @extend .orange;
   @extend .white-text;
 }
 

@@ -156,6 +156,7 @@ GEM
     minitest (5.9.0)
     momentjs-rails (2.11.1)
       railties (>= 3.1)
+    multi_json (1.12.1)
     neat (1.7.4)
       bourbon (>= 4.0)
       sass (>= 3.3)
@@ -167,6 +168,7 @@ GEM
     notiffany (0.1.0)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    oj (2.12.14)
     orm_adapter (0.5.0)
     parser (2.3.1.2)
       ast (~> 2.2)
@@ -186,6 +188,7 @@ GEM
       yard (~> 0.8)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
+    puma (3.4.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -234,6 +237,8 @@ GEM
       uber (~> 0.0.15)
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
+    rollbar (2.12.0)
+      multi_json
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -325,14 +330,17 @@ DEPENDENCIES
   guard-rubocop
   jquery-rails
   materialize-sass
+  oj (~> 2.12.14)
   pg (~> 0.18.4)
   poltergeist
   pry-doc
   pry-rails
+  puma
   rails (~> 4.2.6)
   rails-footnotes (~> 4.0)
   rails_12factor
   reform (~> 2.1.0)
+  rollbar
   rspec-rails (~> 3.0)
   rubocop
   sass-rails (~> 5.0)
