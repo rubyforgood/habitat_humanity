@@ -34,38 +34,40 @@ feature 'Admin can edit work sites' do
   end
 
   context 'from the show view' do
-    xscenario 'deactivate work site' do
-      create(:work_site, active: true)
+    scenario 'deactivate work site' do
+      subject = create(:work_site, active: true)
       sign_in_as_admin
       visit admin_work_site_path(subject)
-      click_button 'Deactivate'
+      click_link 'Deactivate'
 
-      expect(current_path).to eq admin_work_sites_path
+      expect(current_path).to eq admin_work_site_path(subject)
+      expect(page).to have_content 'Activate'
       expect(page).not_to have_content 'Deactivate'
       expect(page).to have_content 'successfully deactivated'
       expect(WorkSite.active.any?).to be false
     end
 
-    xscenario 'activate work site' do
-      create(:work_site, active: true)
+    scenario 'activate work site' do
+      subject = create(:work_site, active: false)
       sign_in_as_admin
       visit admin_work_site_path(subject)
-      click_button 'Deactivate'
+      click_link 'Activate'
 
-      expect(current_path).to eq admin_work_sites_path
+      expect(current_path).to eq admin_work_site_path(subject)
+      expect(page).to have_content 'Deactivate'
       expect(page).not_to have_content 'Activate'
       expect(page).to have_content 'successfully activated'
       expect(WorkSite.exists?(active: false)).to be false
     end
 
-    xscenario 'delete work site' do
-      create(:work_site)
+    scenario 'delete work site' do
+      subject = create(:work_site)
       sign_in_as_admin
       visit admin_work_site_path(subject)
-      click_button 'Delete'
+      click_link 'Destroy'
 
       expect(current_path).to eq admin_work_sites_path
-      expect(page).to have_content 'successfully deleted'
+      expect(page).to have_content 'successfully destroyed'
       expect(WorkSite.any?).to be false
     end
   end
