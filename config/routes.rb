@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   authenticate :user do
     namespace :admin do
       resources :users
-      resources :work_sites
+      resources :work_sites do
+        post '/activation', action: :activate
+        delete '/activation', action: :deactivate
+      end
       resources :volunteers
       resources :shifts
       resources :report_recipients

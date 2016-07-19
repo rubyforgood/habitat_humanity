@@ -1,7 +1,10 @@
 FactoryGirl.define do
   factory :shift do
-    day { Faker::Date.backward(23) }
     work_site
+    
+    sequence :day do |n|
+      Time.zone.today - n.days
+    end
     volunteer { Volunteer.first || FactoryGirl.create(:volunteer) }
 
     trait :full do
