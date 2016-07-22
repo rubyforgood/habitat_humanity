@@ -37,6 +37,7 @@ group :development do
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'rails-footnotes', '~> 4.0'
+  gem 'rails_real_favicon'
   gem 'spring'
   gem 'web-console', '~> 2.0'
 end
