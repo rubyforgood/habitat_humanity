@@ -18,9 +18,13 @@ By default, it renders:
   <meta charset="utf-8" />
   <meta name="ROBOTS" content="NOODP" />
   <meta name="viewport" content="initial-scale=1" />
-  <title><%= content_for(:title) %> | <%= Rails.application.class.parent_name.titlecase %></title>
+  <title>
+    <%= "#{content_for(:title)} | " if content_for(:title).present? %>
+    Habitat for Humanity NOLA
+  </title>
   <%= stylesheet_link_tag "administrate/application", media: "all" %>
   <%= csrf_meta_tags %>
+  <%= render 'application/analytics_js' %>
 </head>
 
 <body>
