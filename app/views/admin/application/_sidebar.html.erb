@@ -17,11 +17,11 @@ as defined by the routes in the `admin/` namespace
       ) %>
     </li>
   <% end %>
-  
+
   <%# Manually-added links %>
-  
+
   <hr />
-  
+
   <li>
     <%= link_to(
       'Check in form',
@@ -29,11 +29,20 @@ as defined by the routes in the `admin/` namespace
       class: 'sidebar__link sidebar__link--inactive'
     ) %>
   </li>
-  
+
   <li>
     <%= link_to(
       'Signatures report',
       signatures_report_path,
+      class: 'sidebar__link sidebar__link--inactive'
+    ) %>
+  </li>
+
+  <li>
+    <%= link_to(
+      'Hours report (csv)',
+      hours_report_path,
+      format: :csv,
       class: 'sidebar__link sidebar__link--inactive'
     ) %>
   </li>
