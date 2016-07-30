@@ -1,0 +1,35 @@
+<%#
+This layout file is meant for administrative views that fall outside of the
+`administrate` gem. This layout can either be included in a controller with the
+`layout 'admin/non_administrate'` command or in the `ApplicationController` by
+adding the desired controller name to `admin_controllers`.
+%>
+
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="ROBOTS" content="NOODP" />
+        <meta name="viewport" content="initial-scale=1" />
+        <title>
+            <%= "#{content_for(:title)} | " if content_for(:title).present? %>
+            Habitat for Humanity NOLA
+        </title>
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+        <%= render 'admin/application/favicon' %>
+        <%= csrf_meta_tags %>
+        <%= render 'analytics_js' %>
+    </head>
+
+    <body>
+        <div class='container col s10 m12'>
+            <%= render 'flash_messages' %>
+            <%= yield %>
+
+            <%# Show Rails Footnotes in development for
+                application performance insight %>
+            <%= content_tag(:div, '', id: 'footnotes_holder') if Rails.env.development? %>
+        </div>
+    </body>
+</html>
