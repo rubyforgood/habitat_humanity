@@ -266,3 +266,14 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 end
+
+# ==> Layout Configuration
+# Configure the layout for the different Devise controllers
+Rails.application.config.to_prepare do
+  admin_layout = 'admin/non_administrate'
+  Devise::SessionsController.layout admin_layout
+  Devise::RegistrationsController.layout admin_layout
+  Devise::ConfirmationsController.layout admin_layout
+  Devise::UnlocksController.layout admin_layout
+  Devise::PasswordsController.layout admin_layout
+end

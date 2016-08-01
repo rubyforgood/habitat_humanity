@@ -3,6 +3,8 @@ require 'date_input' # handles parsing of user-inputted date strings
 class SignaturesReportsController < ApplicationController
   before_action :authenticate_user!
 
+  layout 'admin/non_administrate'
+
   def show
     @end_date     = parse_date params[:end_date],   default: Time.zone.today
     @begin_date   = parse_date params[:begin_date], default: (@end_date - 6.days)
