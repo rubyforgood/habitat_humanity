@@ -66,6 +66,8 @@ To view the admin tools, navigate to `http://localhost:3000/sign_in`. Use the cr
    * Email: `admin@example.com`
    * Password: `password`
 
+*Note: If you didn't run `bin/setup`, run `rake db:initialize_admin` to initialize the admin account.*
+
 
 ## Contributing
 
