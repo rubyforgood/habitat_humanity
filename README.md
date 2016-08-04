@@ -77,7 +77,7 @@ To join the conversation, join the [#habitat_humanity][slack-channel] channel
 on Slack ([get an invite][slack-invite]).
 
 [wiki]: https://github.com/rubyforgood/habitat_humanity/wiki
-[CONTRIBUTING.md]: https://github.com/rubyforgood/habitat_humanity/blob/master/CONTRIBUTING.md
+[CONTRIBUTING.md]: CONTRIBUTING.md
 [slack-channel]: https://rubyforgood.slack.com/messages/habitat_humanity
 [slack-invite]: https://rubyforgood.herokuapp.com/
 
