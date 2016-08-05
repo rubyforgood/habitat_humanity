@@ -10,19 +10,22 @@ on an [open issue]–if the relevant issue doesn't exist, open it!
 
 [open issue]: https://github.com/rubyforgood/habitat_humanity/issues
 
-1. Fork the repo.
+1. Claim an issue on [our issue tracker][open issue] by assigning it to yourself
+   (core team member) or commenting. If the issue doesn't exist yet, open it.
 
-2. Run `./bin/setup`.
+2. Fork the repo.
 
-3. Run the tests. We only take pull requests with passing tests, and it's great
+3. Run `./bin/setup`.
+
+4. Run the tests. We only take pull requests with passing tests, and it's great
    to know that you have a clean slate: `bundle exec rake` and `bundle exec rubocop`
 
-4. Add a test for your change. If you are adding functionality or fixing a
+5. Add a test for your change. If you are adding functionality or fixing a
    bug, you should add a test!
 
-5. Make the test pass.
+6. Make the test pass.
 
-6. Push to your fork and submit a pull request. Include the issue number
+7. Push to your fork and submit a pull request. Include the issue number
    (ex. `Resolves #1`) in the PR description.
 
 At this point you're waiting on us–we'll try to respond to your PR quickly.
