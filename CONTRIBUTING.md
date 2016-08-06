@@ -18,7 +18,7 @@ on an [open issue]–if the relevant issue doesn't exist, open it!
 3. Run `./bin/setup`.
 
 4. Run the tests. We only take pull requests with passing tests, and it's great
-   to know that you have a clean slate: `bundle exec rake` and `bundle exec rubocop`
+   to know that you have a clean slate: `bundle exec rake`
 
 5. Add a test for your change. If you are adding functionality or fixing a
    bug, you should add a test!
@@ -37,5 +37,3 @@ Some things that will increase the chance that your pull request is accepted.
 * Include tests that fail without your code, and pass with it
 * Update the documentation, the surrounding one, examples elsewhere, guides,
   whatever is affected by your contribution
-* The tests and rubocop should both pass–this is required for a successful build!
-
