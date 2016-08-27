@@ -20,9 +20,6 @@ touch-based signature on their smartphone. The technical details will be decided
 by the team as a group, but this JS widget for taking signatures is promising
 (try it on your phone): https://github.com/szimek/signature_pad
 
-More information on the organization is available on their website:
-http://www.habitat-nola.org/
-
 
 ## Quick Start
 
@@ -83,3 +80,29 @@ on Slack ([get an invite][slack-invite]).
 [slack-channel]: https://rubyforgood.slack.com/messages/habitat_humanity
 [slack-invite]: https://rubyforgood.herokuapp.com/
 
+
+## About Habitat for Humanity NOLA
+
+Habitat for Humanity NOLA is the New Orleans branch of the international organization Habitat for
+Humanity. Habitat for Humanity is dedicated to building decent, affordable housing. From their
+statement of purpose:
+
+> We believe in the power of building homes for and with those who need them. We believe that by
+  teaming up with families, volunteers, and donors, we can create thriving communities for
+  generations to come. **We are New Orleans Area Habitat for Humanity. And we believe in the
+  power of home.**
+
+More information on the organization is available on their website:
+http://www.habitat-nola.org/
+
+
+## About Ruby for Good
+
+This project was born at Ruby for Good 2016.
+
+Ruby for Good is an annual event based out of the DC-metro area where Ruby programmers from all over
+the globe get together for a long weekend to build projects that help our communities. For more
+information about Ruby for Good, [visit the website] or [check out the other projects].
+
+[visit the website]: http://rubyforgood.org/
+[check out the other projects]: http://rubyforgood.org/yearbook.html
