@@ -34,6 +34,9 @@ FactoryGirl.define do
       end
     end
 
+    trait :missing_break_return do
+      transient do
+        shift_event_actions(ShiftEvent::ACTIONS.keys - ['end_break'])
       end
     end
   end
