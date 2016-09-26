@@ -47,6 +47,8 @@ class Shift < ActiveRecord::Base
 
   def duration
     duration_without_breaks - breaks_duration
+  rescue IncompleteBreakError
+    'Error: incomplete break'
   end
 
   ##

@@ -51,5 +51,12 @@ RSpec.describe HoursReport, type: :report do
           .not_to be_blank, "email #{i} blank (#{email.inspect})"
       end
     end
+
+    it 'reports an error if a volunteer forgot to sign back in from a break' do
+      FactoryGirl.create :shift, :missing_break_return, day: end_date
+      duration_index = HoursReport::JOINED_HEADERS.index(:duration)
+      durations = rows.map { |row| row[duration_index] }
+      expect(durations).to include 'Error: incomplete break'
+    end
   end
 end
