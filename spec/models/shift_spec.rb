@@ -30,4 +30,16 @@ RSpec.describe Shift, type: :model do
         Shift::IncompleteBreakError
     end
   end
+
+  describe '.completed' do
+    it 'returns only completed shifts' do
+      complete_shift = FactoryGirl.create :shift, :full
+      FactoryGirl.create :shift, :incomplete
+
+      completed_shifts = Shift.completed
+
+      expect(completed_shifts.size).to eq 1
+      expect(completed_shifts).to include complete_shift
+    end
+  end
 end

@@ -15,6 +15,9 @@ class ShiftEvent < ActiveRecord::Base
 
   delegate :address, :day, :volunteer_name, :volunteer_email, :minor, to: :shift
 
+  scope :shift_starts, -> { where(action: 'start_shift') }
+  scope :shift_ends, -> { where(action: 'end_shift') }
+
   def shift_day_matches_occurred_at
     return if day == occurred_at.to_date
     msg = "occurred_at (#{occurred_at.to_date}) does not match day (#{day})"

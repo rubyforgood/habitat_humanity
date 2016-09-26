@@ -39,6 +39,18 @@ class Shift < ActiveRecord::Base
     started? && ended?
   end
 
+  def self.completed
+    from(from(with_shift_start, :shifts).with_shift_end, :shifts)
+  end
+
+  def self.with_shift_start
+    joins(:shift_events).merge(ShiftEvent.shift_starts)
+  end
+
+  def self.with_shift_end
+    joins(:shift_events).merge(ShiftEvent.shift_ends)
+  end
+
   def duration_without_breaks
     return unless complete?
 

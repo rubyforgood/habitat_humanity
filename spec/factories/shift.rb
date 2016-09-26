@@ -39,5 +39,11 @@ FactoryGirl.define do
         shift_event_actions(ShiftEvent::ACTIONS.keys - ['end_break'])
       end
     end
+
+    trait :incomplete do
+      transient do
+        shift_event_actions(['start_shift'])
+      end
+    end
   end
 end

@@ -23,6 +23,13 @@ RSpec.describe HoursReport, type: :report do
       .to eq HoursReport::JOINED_HEADERS.size
   end
 
+  it 'includes only completed shifts' do
+    FactoryGirl.create :shift, :full, day: end_date
+    FactoryGirl.create :shift, :incomplete, day: end_date
+    expect(report.pull_join.count).to eq 1
+    expect(report.pull_join).to all be_complete
+  end
+
   describe '#to_csv' do
     before do
       FactoryGirl.create(:work_site, address: '101 Broadway')
