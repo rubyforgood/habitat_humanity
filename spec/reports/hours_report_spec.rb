@@ -17,10 +17,17 @@ RSpec.describe HoursReport, type: :report do
   it 'generates CSV' do
     # Create a shift inside our weekly report period
     FactoryGirl.create(:shift, :full, day: begin_date + 1.day)
-    round_trip = CSV.parse(report.to_csv)
-    expect(round_trip.size).to be > 1
-    expect(round_trip.first.size)
+    rows = CSV.parse(report.to_csv)
+    expect(rows.size).to be > 1
+    expect(rows.first.size)
       .to eq HoursReport::JOINED_HEADERS.size
+  end
+
+  it 'includes only completed shifts' do
+    FactoryGirl.create :shift, :full, day: end_date
+    FactoryGirl.create :shift, :incomplete, day: end_date
+    expect(report.pull_join.count).to eq 1
+    expect(report.pull_join).to all be_complete
   end
 
   describe '#to_csv' do
@@ -30,12 +37,12 @@ RSpec.describe HoursReport, type: :report do
                          day: begin_date + 1.day,
                          work_site: WorkSite.first)
     end
-    let(:round_trip) { CSV.parse(report.to_csv) }
+    let(:rows) { CSV.parse(report.to_csv) }
 
     it "each row includes a work_site's address" do
       address_index = HoursReport::JOINED_HEADERS
                       .index(:address)
-      addresses = round_trip.map { |r| r[address_index] }
+      addresses = rows.map { |row| row[address_index] }
       addresses.each_with_index do |address, i|
         expect(address)
           .not_to be_blank, "address #{i} blank (#{address.inspect})"
@@ -45,11 +52,19 @@ RSpec.describe HoursReport, type: :report do
     it "each row includes a volunteer's email address" do
       email_index = HoursReport::JOINED_HEADERS
                     .index(:volunteer_email)
-      emails = round_trip.map { |r| r[email_index] }
+      emails = rows.map { |row| row[email_index] }
       emails.each_with_index do |email, i|
         expect(email)
           .not_to be_blank, "email #{i} blank (#{email.inspect})"
       end
+    end
+
+    it 'reports an error if a volunteer forgot to sign back in from a break' do
+      FactoryGirl.create :shift, :missing_break_return, day: end_date
+      duration_index = HoursReport::JOINED_HEADERS.index(:duration)
+      durations = rows.map { |row| row[duration_index] }
+      expect(durations).to \
+        include 'Error: volunteer never checked in from break'
     end
   end
 end
