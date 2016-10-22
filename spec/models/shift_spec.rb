@@ -18,7 +18,8 @@ RSpec.describe Shift, type: :model do
 
     it 'can handle a missing shift_end event' do
       shift = FactoryGirl.create :shift, :missing_break_return
-      expect(shift.duration).to eq 'Error: incomplete break'
+      expect(shift.duration).to \
+        eq 'Error: volunteer never checked in from break'
     end
   end
 

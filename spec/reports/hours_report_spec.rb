@@ -63,7 +63,8 @@ RSpec.describe HoursReport, type: :report do
       FactoryGirl.create :shift, :missing_break_return, day: end_date
       duration_index = HoursReport::JOINED_HEADERS.index(:duration)
       durations = rows.map { |row| row[duration_index] }
-      expect(durations).to include 'Error: incomplete break'
+      expect(durations).to \
+        include 'Error: volunteer never checked in from break'
     end
   end
 end
