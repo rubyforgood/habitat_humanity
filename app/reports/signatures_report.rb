@@ -24,13 +24,23 @@ class SignaturesReport
   # @private
   #
   # @return [ActiveRecord::Relation]
-  def pull_join
+  def pull_join(site_id = 0)
     start_time = begin_date.in_time_zone.beginning_of_day
     end_time   = end_date.in_time_zone.end_of_day
 
+    if 0 == site_id
+      return ShiftEvent
+        .includes(shift: [:work_site, :volunteer])
+        .where(occurred_at: start_time..end_time,
+               work_sites:  { active: true })
+        .order(:occurred_at)
+    end
+
     ShiftEvent
+      .joins(   shift: [:work_site, :volunteer])
+      .where(occurred_at: start_time..end_time,
+             shifts:      { work_site_id:     site_id })
       .includes(shift: [:work_site, :volunteer])
-      .where(occurred_at: start_time..end_time)
       .order(:occurred_at)
   end
 
