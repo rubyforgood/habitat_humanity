@@ -127,9 +127,9 @@ feature 'Admins can view the volunteer signature report', type: :feature do
   # When I take the default value for the Site drop-down
   # Then I see a list for all sites
   scenario 'when the default of "all sites" is used' do
-    generate_entries(dates: [6.days.ago, 1.days.ago])
+    generate_entries(dates: [6.days.ago, 1.day.ago])
     start_date  = 6.days.ago.to_date
-    end_date    = 1.days.ago.to_date
+    end_date    = 1.day.ago.to_date
 
     sign_in_as_admin
     visit signatures_report_path
@@ -139,8 +139,6 @@ feature 'Admins can view the volunteer signature report', type: :feature do
     end
     click_button 'Generate'
 
-    #binding.pry
-
     expect(page).to have_content 'Site: All Sites'
   end
 
@@ -148,9 +146,9 @@ feature 'Admins can view the volunteer signature report', type: :feature do
   # When I select a particular Site
   # Then I see a list for that site
   scenario 'when a specific site is selected' do
-    generate_entries(dates: [6.days.ago, 1.days.ago])
+    generate_entries(dates: [6.days.ago, 1.day.ago])
     start_date  = 6.days.ago.to_date
-    end_date    = 1.days.ago.to_date
+    end_date    = 1.day.ago.to_date
 
     sign_in_as_admin
     visit signatures_report_path
@@ -161,9 +159,6 @@ feature 'Admins can view the volunteer signature report', type: :feature do
     end
     click_button 'Generate'
 
-    #binding.pry
-
     expect(page).not_to have_content 'Site: All Sites'
   end
-
 end

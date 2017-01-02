@@ -10,14 +10,18 @@ class SignaturesReportsController < ApplicationController
 
   layout 'admin/non_administrate'
 
-  def show
+  def init_vars
     @sites        = [['All Sites', 0]] + work_sites
     @end_date     = parse_date params[:end_date],   default: Time.zone.today
     @begin_date   = parse_date params[:begin_date], default: (@end_date - 6.days)
     @site_id      = ((params[:site] || {})[:id] || 0).to_i
 
-    addr_cell     = @sites.find {|c| c[1] == @site_id} || ['unknown', 0]
+    addr_cell     = @sites.find { |c| c[1] == @site_id } || ['unknown', 0]
     @site_addr    = addr_cell[0]
+  end
+
+  def show
+    init_vars
 
     if valid_date_range?
       @shift_events = shift_events_for_range(@begin_date, @end_date, @site_id)
