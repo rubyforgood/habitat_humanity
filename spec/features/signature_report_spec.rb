@@ -120,4 +120,17 @@ feature 'Admins can view the volunteer signature report', type: :feature do
     visit signatures_report_path
     expect(current_path).to eq new_user_session_path
   end
+
+  # Given I am signed in as an admin
+  # and given an signature image wider than 650px
+  # when I visit the volunteer signature report page
+  # I see an image that is no wider than 650px
+  scenario 'when image width exceeds 650px, it rescales' do
+    generate_entries dates: [Time.zone.today]
+
+    sign_in_as_admin
+    visit signatures_report_path
+    img_width = find(:css, 'img')['width']
+    expect(img_width).to eq('650')
+  end
 end

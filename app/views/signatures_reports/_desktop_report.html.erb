@@ -15,7 +15,7 @@
     <td><%= event.occurred_at.strftime("%I:%M%p") %></td>
     <td><%= event.action %></td>
     <td><%= event.volunteer_email %></td>
-    <td class="hide-on-med-and-down"><img src='<%= event.signature %>' /></td>
+    <td class="hide-on-med-and-down"><img width="650" src=<%= event.signature %> /></td>
   </tr>
 <% end %>
 </table>
