@@ -32,19 +32,20 @@ You need:
 - Ruby 2.3
 - Rails 4.2.x
 - Postgres 9.5 (May be changed by team later)
+- A javascript runtime, we recommend node.js 
 - PhantomJS (`brew install phantomjs` on macOS or
-  [read instructions][phantom-js-instructions])
+  [read instructions](https://github.com/teampoltergeist/poltergeist#installing-phantomjs))
 
-[phantom-js-instructions]: (https://github.com/teampoltergeist/poltergeist#installing-phantomjs)
+You will need Node.js (which comes bundled with NPM) and it is simple to install on Mac, Windows, or Linux by downloading and installing from [node.js](https://nodejs.org/en/download/).
 
-Basically you need Git, Ruby and Rails.  If you have Git, Ruby and Postgres in
+
+You will also need Git, Ruby, Rails, and PostgreSQL.  If you have Git, Ruby and Postgres in
 some version or another you're probably set. But:
 
-- If you're working on a virgin Windows machine, you're best off going with
-  the RailsInstaller at http://railsinstaller.org.
-- If you have a virgin Mac OSX machine, just follow the directions in
-  https://gorails.com/setup/osx/10.11-el-capitan.
-
+- If you're working on a virgin Windows machine, you're best off installing Ruby and Rails with
+  the [RailsInstaller](http://railsinstaller.org). For PostgreSQL, you'll want to install [EnterpriseDB](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows)
+- If you have a virgin Mac OSX machine, just follow these [directions](https://gorails.com/setup/osx/10.12-sierra). This includes PostgreSQL
+- If you are using Ubuntu Linux, use this [RailsApps Guide](http://railsapps.github.io/installrubyonrails-ubuntu.html) to get set up with Ruby, Rails, and node.js and this guide to [install PostgreSQL in Ubuntu](https://www.postgresql.org/download/linux/ubuntu/)
 
 Then from a command prompt:
 

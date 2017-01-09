@@ -39,6 +39,18 @@ class Shift < ActiveRecord::Base
     started? && ended?
   end
 
+  def self.completed
+    from(from(with_shift_start, :shifts).with_shift_end, :shifts)
+  end
+
+  def self.with_shift_start
+    joins(:shift_events).merge(ShiftEvent.shift_starts)
+  end
+
+  def self.with_shift_end
+    joins(:shift_events).merge(ShiftEvent.shift_ends)
+  end
+
   def duration_without_breaks
     return unless complete?
 
@@ -47,6 +59,8 @@ class Shift < ActiveRecord::Base
 
   def duration
     duration_without_breaks - breaks_duration
+  rescue IncompleteBreakError
+    'Error: volunteer never checked in from break'
   end
 
   ##
@@ -64,8 +78,15 @@ class Shift < ActiveRecord::Base
       .each_slice(2)
   end
 
+  class IncompleteBreakError < StandardError
+    def initialize(message = 'start or end time is missing for a break')
+      super
+    end
+  end
+
   def breaks_duration
     breaks.map do |(start_break, end_break)|
+      raise IncompleteBreakError unless start_break && end_break
       end_break.occurred_at - start_break.occurred_at
     end.inject(0.0, :+).seconds / 1.hour
   end
