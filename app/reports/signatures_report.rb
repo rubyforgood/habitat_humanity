@@ -41,11 +41,11 @@ class SignaturesReport
       .order(:occurred_at)
   end
 
-  def pull_join(site_id = 0)
+  def pull_join(site_id = -1)
     start_time = begin_date.in_time_zone.beginning_of_day
     end_time   = end_date.in_time_zone.end_of_day
 
-    return events_in_range(start_time, end_time) if 0 == site_id
+    return events_in_range(start_time, end_time) if -1 == site_id
 
     events_in_range_at_site(start_time, end_time, site_id)
   end

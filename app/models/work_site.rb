@@ -26,4 +26,19 @@ class WorkSite < ActiveRecord::Base
     deactivate
     save!
   end
+
+  def self.select_box_input
+    fallback    = ['All Sites', -1]
+    addresses   = where(active: true).order(:address).pluck(:address, :id)
+    addresses.unshift fallback
+  end
+
+  def self.site_id_selected(params)
+    ((params[:site] || {})[:id] || -1).to_i
+  end
+
+  def self.addr_for_id(sites, site_id = -1)
+    addr_cell = sites.find { |c| c[1] == site_id } || ['unknown', -1]
+    addr_cell[0]
+  end
 end
