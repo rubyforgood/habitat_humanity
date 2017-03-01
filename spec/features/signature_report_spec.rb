@@ -154,4 +154,13 @@ feature 'Admins can view the volunteer signature report', type: :feature do
     img_width = find(:css, 'img')['width']
     expect(img_width).to eq('650')
   end
+
+  scenario 'when an admin visits the page', js: true do
+    generate_entries dates: [Time.zone.today]
+
+    visit new_user_session_path
+
+    expect(page).to have_content 'Log in'
+  end
+
 end
