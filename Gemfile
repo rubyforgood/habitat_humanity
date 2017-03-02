@@ -28,6 +28,7 @@ group :development, :test do
   gem 'faker'
   gem 'rubocop'
   gem 'poltergeist'
+  gem 'phantomjs', require: 'phantomjs/poltergeist'
 end
 
 group :development do
@@ -46,4 +47,5 @@ group :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 3.0'
   gem 'timecop',  '~> 0.8.1'
+  gem 'launchy'
 end

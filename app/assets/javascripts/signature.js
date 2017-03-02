@@ -1,5 +1,6 @@
 //= require signature_pad
-$( document ).ready(function() {
+$(document).ready(function() {
+if ($('#check-in-form').length) {
   $('select').material_select();
   $( ".dropdown-content span:contains('Break')" ).append( " <sup class='Signature-sup'>* signature not required</sup>" );
   $( ".dropdown-content span:contains('Break')" ).closest('li').addClass('break')
@@ -47,4 +48,6 @@ resizeCanvas();
       $('#check_in_form_signature').val(signaturePad.toDataURL());
     }
   });
+
+}
 })
