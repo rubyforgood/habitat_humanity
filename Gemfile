@@ -28,7 +28,7 @@ group :development, :test do
   gem 'faker'
   gem 'rubocop'
   gem 'poltergeist'
-  gem 'phantomjs', :require => 'phantomjs/poltergeist'
+  gem 'phantomjs', require: 'phantomjs/poltergeist'
 end
 
 group :development do

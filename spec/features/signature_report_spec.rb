@@ -163,5 +163,4 @@ feature 'Admins can view the volunteer signature report', type: :feature do
 
     expect(page).to have_content 'Log in'
   end
-
 end
