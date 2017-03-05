@@ -1,6 +1,6 @@
 class SignOutReminderMailer < ApplicationMailer
-  default from: ENV['WEEKLY_REPORT_FROM'] || 'communications@habitat-nola.org'
-
+  default from: ENV['WEEKLY_REPORT_FROM'] || 'communications@habitat-nola.org',
+          bcc: proc { ReportRecipient.pluck(:email) }
   def self.end_of_day_reminders
     shifts = Shift.incomplete.where(day: Time.zone.today)
 
