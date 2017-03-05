@@ -43,6 +43,13 @@ class Shift < ActiveRecord::Base
     from(from(with_shift_start, :shifts).with_shift_end, :shifts)
   end
 
+  def self.incomplete
+    select('shifts.*, shift_events.action')
+      .joins('LEFT JOIN shift_events ON shifts.id = shift_events.shift_id '\
+             "AND shift_events.action = 'end_shift'")
+      .where('shift_events.action IS NULL')
+  end
+
   def self.with_shift_start
     joins(:shift_events).merge(ShiftEvent.shift_starts)
   end

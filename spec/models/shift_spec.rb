@@ -43,4 +43,35 @@ RSpec.describe Shift, type: :model do
       expect(completed_shifts).to include complete_shift
     end
   end
+
+  describe '.incomplete' do
+    it 'returns only incomplete shifts' do
+      complete_shift = FactoryGirl.create(:shift, :full)
+      incomplete_shift = FactoryGirl.create(:shift, :incomplete)
+
+      incomplete_shifts = Shift.incomplete
+
+      expect(incomplete_shifts).to include incomplete_shift
+      expect(incomplete_shifts).not_to include complete_shift
+      incomplete_shifts.each { |shift| expect(shift.shift_end).to be nil }
+      expect(incomplete_shifts.size).to eq 1
+    end
+
+    it 'can be limited to a specific day' do
+      past_incomplete_shift = FactoryGirl.create(:shift, :incomplete)
+      past_incomplete_shift.update(day: Date.new(2017, 1, 9))
+      incomplete_shift = FactoryGirl.create(:shift, :incomplete)
+      incomplete_shift.update(day: Date.new(2017, 1, 10))
+      future_incomplete_shift = FactoryGirl.create(:shift, :incomplete)
+      future_incomplete_shift.update(day: Date.new(2017, 1, 11))
+
+      incomplete_shifts = Shift.incomplete.where(day: Date.new(2017, 1, 10))
+
+      expect(incomplete_shifts).to include incomplete_shift
+      expect(incomplete_shifts).not_to include past_incomplete_shift
+      expect(incomplete_shifts).not_to include future_incomplete_shift
+      incomplete_shifts.each { |shift| expect(shift.shift_end).to be nil }
+      expect(incomplete_shifts.size).to eq 1
+    end
+  end
 end
