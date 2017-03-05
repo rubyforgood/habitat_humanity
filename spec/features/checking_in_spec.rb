@@ -23,7 +23,7 @@ RSpec.describe 'Checking in at a worksite', type: :feature do
 
     shift_event = ShiftEvent.first
     expect(shift_event.action).to eq('start_shift')
-    # expect(shift_event.occurred_at).to eq(Time.zone.local(2016, 1, 1, 16, 30))
+    expect(shift_event.occurred_at).to eq(Time.zone.local(2016, 1, 1, 16, 30))
   end
 
   # Given the main form has just loaded
