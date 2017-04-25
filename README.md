@@ -53,7 +53,7 @@ Then from a command prompt:
 $ git clone http://github.com/rubyforgood/habitat_humanity
 $ cd habitat_humanity
 $ bin/setup
-$ rails s
+$ puma
 ```
 
 Then navigate to `http://localhost:3000` in your browser to view the app.
