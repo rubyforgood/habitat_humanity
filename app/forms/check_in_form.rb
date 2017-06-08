@@ -1,7 +1,7 @@
 class CheckInForm < ApplicationForm
   DATE_FORMAT     = '%d %B, %Y'.freeze
   TIME_FORMAT     = '%l:%M %p'.freeze
-  COMBINED_FORMAT = "#{DATE_FORMAT} #{TIME_FORMAT}".freeze
+  COMBINED_FORMAT = "#{DATE_FORMAT} #{TIME_FORMAT} %z".freeze
   SHIFT_ACTIONS   = %w(start_shift end_shift).freeze
 
   attr_accessor :name, :email, :work_site_id, :day, :time, :action, :signature,
@@ -49,7 +49,11 @@ class CheckInForm < ApplicationForm
   end
 
   def occurred_at
-    Time.strptime "#{day} #{time}", COMBINED_FORMAT
+    time_zone_offset =
+      ActiveSupport::TimeZone[Rails.application.config.time_zone]
+      .formatted_offset
+
+    Time.strptime "#{day} #{time} #{time_zone_offset}", COMBINED_FORMAT
   end
 
   def shift

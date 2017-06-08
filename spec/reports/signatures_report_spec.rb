@@ -20,9 +20,9 @@ RSpec.describe SignaturesReport, type: :report do
 
     # Create a shift inside our weekly report period
     FactoryGirl.create(:shift, :full, day: begin_date + 1.day)
-    round_trip = CSV.parse(report.to_csv)
-    expect(round_trip.size).to be > 1
-    expect(round_trip.first.size)
+    rows = CSV.parse(report.to_csv)
+    expect(rows.size).to be > 1
+    expect(rows.first.size)
       .to eq SignaturesReport::JOINED_HEADERS.size
   end
 
@@ -33,12 +33,12 @@ RSpec.describe SignaturesReport, type: :report do
                          day: begin_date + 1.day,
                          work_site: WorkSite.first)
     end
-    let(:round_trip) { CSV.parse(report.to_csv) }
+    let(:rows) { CSV.parse(report.to_csv) }
 
     it "each row includes a work_site's address" do
       address_index = SignaturesReport::JOINED_HEADERS
                       .index(:address)
-      addresses = round_trip.map { |r| r[address_index] }
+      addresses = rows.map { |row| row[address_index] }
       addresses.each_with_index do |address, i|
         expect(address)
           .not_to be_blank, "address #{i} blank (#{address.inspect})"
@@ -48,7 +48,7 @@ RSpec.describe SignaturesReport, type: :report do
     it "each row includes a volunteer's email address" do
       email_index = SignaturesReport::JOINED_HEADERS
                     .index(:volunteer_email)
-      emails = round_trip.map { |r| r[email_index] }
+      emails = rows.map { |row| row[email_index] }
       emails.each_with_index do |email, i|
         expect(email)
           .not_to be_blank, "email #{i} blank (#{email.inspect})"

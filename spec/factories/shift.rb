@@ -1,25 +1,48 @@
 FactoryGirl.define do
   factory :shift do
     work_site
-    
+
     sequence :day do |n|
       Time.zone.today - n.days
     end
     volunteer { Volunteer.first || FactoryGirl.create(:volunteer) }
 
-    trait :full do
-      after(:build) do |shift|
-        day_begin = shift.day.beginning_of_day
-        day_end = shift.day.end_of_day
-
-        ShiftEvent::ACTIONS.keys.zip(
-          Array.new(4) { Faker::Time.between(day_begin, day_end) }.sort
-        ).each do |(action, occurred_at)|
-          create(
-            :shift_event,
-            action: action, occurred_at: occurred_at, shift: shift,
-          )
+    transient do
+      day_begin { day.beginning_of_day }
+      day_end { day.end_of_day }
+      shift_event_actions []
+      shift_event_actions_with_times do
+        times = Array.new(shift_event_actions.length) do
+          Faker::Time.between(day_begin, day_end)
         end
+        shift_event_actions.zip(times.sort)
+      end
+    end
+
+    after :build do |shift, evaluator|
+      evaluator.shift_event_actions_with_times.each do |(action, occurred_at)|
+        create(
+          :shift_event,
+          action: action, occurred_at: occurred_at, shift: shift,
+        )
+      end
+    end
+
+    trait :full do
+      transient do
+        shift_event_actions ShiftEvent::ACTIONS.keys
+      end
+    end
+
+    trait :missing_break_return do
+      transient do
+        shift_event_actions(ShiftEvent::ACTIONS.keys - ['end_break'])
+      end
+    end
+
+    trait :incomplete do
+      transient do
+        shift_event_actions(['start_shift'])
       end
     end
   end

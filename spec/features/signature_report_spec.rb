@@ -19,6 +19,27 @@ feature 'Admins can view the volunteer signature report', type: :feature do
   end
 
   # Given I am a signed-in site admin
+  # When I visit the volunteer signature report page
+  # Then I see a list of information on shift events
+  scenario 'when an admin sees shift information' do
+    generate_entries dates: [Time.zone.today]
+    shift_event = ShiftEvent.last
+
+    sign_in_as_admin
+    visit signatures_report_path
+
+    within('.entry') do
+      expect(page).to have_content(shift_event.address)
+      expect(page).to have_content(shift_event.occurred_at.to_date)
+      expect(page).to have_content(shift_event.occurred_at.strftime('%I:%M%p'))
+      expect(page).to have_content(shift_event.action)
+      expect(page).to have_content(shift_event.volunteer_name)
+      expect(page).to have_content(shift_event.volunteer_email)
+      expect(page).to have_css('img')
+    end
+  end
+
+  # Given I am a signed-in site admin
   # When I set the start and end dates to valid values
   # Then I see a list of volunteer actions for the given date range
   scenario 'when the start and end dates are specified' do
@@ -119,5 +140,27 @@ feature 'Admins can view the volunteer signature report', type: :feature do
   scenario 'when the visitor is not an admin' do
     visit signatures_report_path
     expect(current_path).to eq new_user_session_path
+  end
+
+  # Given I am signed in as an admin
+  # and given an signature image wider than 650px
+  # when I visit the volunteer signature report page
+  # I see an image that is no wider than 650px
+  scenario 'when image width exceeds 650px, it rescales' do
+    generate_entries dates: [Time.zone.today]
+
+    sign_in_as_admin
+    visit signatures_report_path
+    img_width = find(:css, 'img')['width']
+    expect(img_width).to eq('650')
+  end
+
+  scenario 'when an admin visits the page', js: true do
+    skip 'PhantomJS 2+ required' unless ENV['RAILS_SPEC_JS']
+    generate_entries dates: [Time.zone.today]
+
+    visit new_user_session_path
+
+    expect(page).to have_content 'Log in'
   end
 end

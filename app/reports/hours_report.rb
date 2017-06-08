@@ -28,12 +28,11 @@ class HoursReport
   #
   # @return [ActiveRecord::Relation]
   def pull_join
-    # TODO: Have yet to get a Railsy query working here
     Shift
       .includes(:work_site, :volunteer, :shift_events)
+      .completed
       .where(day: begin_date..end_date)
       .order(:day)
-      .select(&:complete?)
   end
 
   ##
