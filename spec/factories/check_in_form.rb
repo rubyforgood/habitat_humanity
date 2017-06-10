@@ -1,4 +1,5 @@
 FactoryGirl.define do
+  # TODO: this factory is invalid sometimes, see issue #122
   factory :check_in_form do
     transient do
       signature_required? { CheckInForm::SHIFT_ACTIONS.include? action }
