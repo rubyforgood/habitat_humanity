@@ -31,7 +31,7 @@ class CheckInForm < ApplicationForm
     shift.save!
     shift_event.save!
   end
-  alias_method :save!, :save
+  alias save! save
 
   def work_site
     return nil if work_site_id.nil?

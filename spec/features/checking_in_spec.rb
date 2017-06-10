@@ -36,7 +36,7 @@ RSpec.describe 'Checking in at a worksite', type: :feature do
 
     visit root_path
     page.execute_script('document.getElementById("pick-a-time").click()')
-    
+
     clock = find '.lolliclock-popover'
     expect(clock).to be_visible
   end
