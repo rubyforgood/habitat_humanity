@@ -44,4 +44,11 @@ RSpec.describe CheckInForm do
       end
     end
   end
+
+  it 'should save time in the local time zone' do
+    form = create :check_in_form, day: '1 January, 2016', time: '4:30 PM'
+
+    expect(ShiftEvent.first.occurred_at).to eq \
+      Time.zone.local(2016, 1, 1, 16, 30)
+  end
 end
