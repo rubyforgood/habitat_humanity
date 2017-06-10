@@ -13,7 +13,7 @@ class CheckInForm < ApplicationForm
   validates :day,       presence: true
   validates :time,      presence: true
   validates :action,    presence: true
-  validates :signature, presence: true, if: :shift_action?
+  validates :signature, presence: true, if: :signature_required?
 
   def initialize(attributes = {})
     @name         = attributes[:name]
@@ -31,6 +31,7 @@ class CheckInForm < ApplicationForm
     shift.save!
     shift_event.save!
   end
+  alias_method :save!, :save
 
   def work_site
     return nil if work_site_id.nil?
@@ -40,7 +41,7 @@ class CheckInForm < ApplicationForm
 
   private
 
-  def shift_action?
+  def signature_required?
     SHIFT_ACTIONS.include? action
   end
 
