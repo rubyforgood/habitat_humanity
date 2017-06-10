@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Checking in at a worksite', type: :feature do
   it 'saves the shift event' do
-    work_site = WorkSite.create! address: '101 Main Street'
+    work_site = create :work_site
 
     visit root_path
     fill_in 'Name', with: 'Sam Jones'
@@ -11,7 +11,7 @@ RSpec.describe 'Checking in at a worksite', type: :feature do
     fill_in 'Day', with: '1 January, 2016'
     fill_in 'pick-a-time', with: '4:30 PM'
     select 'Start Shift', from: 'Action'
-    find(:css, '#check_in_form_signature', visible: false).set 'my signature'
+    find('#check_in_form_signature', visible: false).set 'my signature'
     click_button 'Save'
 
     expect(page).to have_content 'Check in has been saved.'
@@ -21,8 +21,10 @@ RSpec.describe 'Checking in at a worksite', type: :feature do
   # Then I do not see the lolliclock widget
   scenario 'hides the lolliclock widget when the form loads', js: true do
     skip 'PhantomJS 2+ required' unless ENV['RAILS_SPEC_JS']
+
     visit root_path
-    expect { find(:css, '.lolliclock-popover') }
+
+    expect { find '.lolliclock-popover' }
       .to raise_error Capybara::ElementNotFound
   end
 
@@ -31,9 +33,11 @@ RSpec.describe 'Checking in at a worksite', type: :feature do
   # Then I see the lolliclock widget
   scenario 'activates lolliclock when time input is focused', js: true do
     skip 'PhantomJS 2+ required' unless ENV['RAILS_SPEC_JS']
+
     visit root_path
     page.execute_script('document.getElementById("pick-a-time").click()')
-    clock = find(:css, '.lolliclock-popover')
+    
+    clock = find '.lolliclock-popover'
     expect(clock).to be_visible
   end
 end
