@@ -26,4 +26,22 @@ RSpec.describe CheckInForm do
       expect(form).to be_valid
     end
   end
+
+  describe '#save' do
+    context 'when the volunteer signs in for the start of the shift' do
+      let(:form) { build :check_in_form, action: 'start_shift' }
+
+      it 'creates a shift' do
+        expect { form.save }.to change { Shift.count }.by(1)
+      end
+
+      it 'creates a shift_event' do
+        expect { form.save }.to change { ShiftEvent.count }.by(1)
+      end
+
+      it 'creates a volunteer' do
+        expect { form.save }.to change { Volunteer.count }.by(1)
+      end
+    end
+  end
 end
