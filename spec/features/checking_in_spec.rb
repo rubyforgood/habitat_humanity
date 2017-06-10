@@ -14,8 +14,7 @@ RSpec.describe 'Checking in at a worksite', type: :feature do
     find(:css, '#check_in_form_signature', visible: false).set 'my signature'
     click_button 'Save'
 
-    shift_event = ShiftEvent.first
-    expect(shift_event.action).to eq('start_shift')
+    expect(page).to have_content 'Check in has been saved.'
   end
 
   # Given the main form has just loaded
