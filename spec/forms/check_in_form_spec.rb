@@ -6,12 +6,14 @@ RSpec.describe CheckInForm do
       form = build :check_in_form, signature: nil, action: 'start_shift'
 
       expect(form).to_not be_valid
+      expect(form.errors[:signature]).to_not be_blank
     end
 
     it 'is required for end_shift' do
       form = build :check_in_form, signature: nil, action: 'end_shift'
 
       expect(form).to_not be_valid
+      expect(form.errors[:signature]).to_not be_blank
     end
 
     it 'is not required for start_break' do
