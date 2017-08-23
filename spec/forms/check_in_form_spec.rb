@@ -1,37 +1,56 @@
 require 'rails_helper'
 
 RSpec.describe CheckInForm do
-  let(:form) { CheckInForm.new }
+  describe 'signature field' do
+    it 'is required for start_shift' do
+      form = build :check_in_form, signature: nil, action: 'start_shift'
 
-  it 'requires a signature for start_shift' do
-    form.signature = nil
-    form.action    = 'start_shift'
+      expect(form).to_not be_valid
+      expect(form.errors[:signature]).to_not be_blank
+    end
 
-    expect(form).to_not be_valid
-    expect(form.errors[:signature]).to_not be_blank
+    it 'is required for end_shift' do
+      form = build :check_in_form, signature: nil, action: 'end_shift'
+
+      expect(form).to_not be_valid
+      expect(form.errors[:signature]).to_not be_blank
+    end
+
+    it 'is not required for start_break' do
+      form = build :check_in_form, signature: nil, action: 'start_break'
+
+      expect(form).to be_valid
+    end
+
+    it 'is not required for end_break' do
+      form = build :check_in_form, signature: nil, action: 'end_break'
+
+      expect(form).to be_valid
+    end
   end
 
-  it 'requires a signature for end_shift' do
-    form.signature = nil
-    form.action    = 'end_shift'
+  describe '#save' do
+    context 'when the volunteer signs in for the start of the shift' do
+      let(:form) { build :check_in_form, action: 'start_shift' }
 
-    expect(form).to_not be_valid
-    expect(form.errors[:signature]).to_not be_blank
+      it 'creates a shift' do
+        expect { form.save }.to change { Shift.count }.by(1)
+      end
+
+      it 'creates a shift_event' do
+        expect { form.save }.to change { ShiftEvent.count }.by(1)
+      end
+
+      it 'creates a volunteer' do
+        expect { form.save }.to change { Volunteer.count }.by(1)
+      end
+    end
   end
 
-  it 'requires a signature for start_break' do
-    form.signature = nil
-    form.action    = 'start_break'
+  it 'should save time in the local time zone' do
+    create :check_in_form, day: '1 January, 2016', time: '4:30 PM'
 
-    form.valid?
-    expect(form.errors[:signature]).to be_blank
-  end
-
-  it 'requires a signature for end_break' do
-    form.signature = nil
-    form.action    = 'end_break'
-
-    form.valid?
-    expect(form.errors[:signature]).to be_blank
+    expect(ShiftEvent.first.occurred_at).to eq \
+      Time.zone.local(2016, 1, 1, 16, 30)
   end
 end
