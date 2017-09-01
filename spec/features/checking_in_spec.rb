@@ -40,4 +40,20 @@ feature 'Checking in at a worksite', type: :feature do
     clock = find '.lolliclock-popover'
     expect(clock).to be_visible
   end
+
+  scenario 'gives an error if the user tries to check in too early' do
+    work_site = create :work_site
+
+    visit root_path
+    fill_in 'Name', with: 'Sam Jones'
+    fill_in 'Email', with: 'my@email.com'
+    select work_site.address, from: 'Work site'
+    fill_in 'Day', with: '1 January, 2016'
+    fill_in 'pick-a-time', with: '1:00 AM'
+    select 'Start Shift', from: 'Action'
+    find('#check_in_form_signature', visible: false).set 'my signature'
+    click_button 'Save'
+
+    expect(page).to have_content 'not valid'
+  end
 end
