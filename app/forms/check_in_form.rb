@@ -11,7 +11,8 @@ class CheckInForm < ApplicationForm
   validates :email,     presence: true
   validates :work_site, presence: true
   validates :day,       presence: true
-  validates :time,      presence: true
+  validates :time,      presence: true,
+                        timeliness: { between: '7:00am'..'5:00pm' }
   validates :action,    presence: true
   validates :signature, presence: true, if: :signature_required?
 

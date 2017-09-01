@@ -15,6 +15,7 @@ gem 'reform', '~> 2.1.0'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
+gem 'validates_timeliness'
 
 group :production do
   gem 'newrelic_rpm'
