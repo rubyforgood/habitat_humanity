@@ -30,11 +30,17 @@ RSpec.describe CheckInForm do
   end
 
   describe 'time field' do
-    it 'is required to be between 7am and 5pm' do
+    it 'is invalid when not between 7am and 5pm' do
       form = build :check_in_form, time: '1:00 AM'
 
       expect(form).to be_invalid
       expect(form.errors[:time]).to_not be_blank
+    end
+
+    it 'is valid when between 7am and 5pm' do
+      form = build :check_in_form, time: '8:00am'
+
+      expect(form).to be_valid
     end
   end
 
