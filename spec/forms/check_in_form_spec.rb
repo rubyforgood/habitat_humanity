@@ -2,6 +2,13 @@ require 'rails_helper'
 
 RSpec.describe CheckInForm do
   describe 'signature field' do
+    around do |example|
+      time = Timeliness.parse('2017-01-01 10:00am', zone: 'US/Central')
+      Timecop.freeze(time) do
+        example.run
+      end
+    end
+
     it 'is required for start_shift' do
       form = build :check_in_form, signature: nil, action: 'start_shift'
 
@@ -45,6 +52,13 @@ RSpec.describe CheckInForm do
   end
 
   describe '#save' do
+    around do |example|
+      time = Timeliness.parse('2017-01-01 10:00am', zone: 'US/Central')
+      Timecop.freeze(time) do
+        example.run
+      end
+    end
+
     context 'when the volunteer signs in for the start of the shift' do
       let(:form) { build :check_in_form, action: 'start_shift' }
 
