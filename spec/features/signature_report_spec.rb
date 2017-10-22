@@ -156,7 +156,6 @@ feature 'Admins can view the volunteer signature report', type: :feature do
   end
 
   scenario 'when an admin visits the page', js: true do
-    skip 'PhantomJS 2+ required' unless ENV['RAILS_SPEC_JS']
     generate_entries dates: [Time.zone.today]
 
     visit new_user_session_path

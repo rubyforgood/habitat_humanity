@@ -20,8 +20,6 @@ feature 'Checking in at a worksite', type: :feature do
   # Given the main form has just loaded
   # Then I do not see the lolliclock widget
   scenario 'hides the lolliclock widget when the form loads', js: true do
-    skip 'PhantomJS 2+ required' unless ENV['RAILS_SPEC_JS']
-
     visit root_path
 
     expect { find '.lolliclock-popover' }
@@ -32,8 +30,6 @@ feature 'Checking in at a worksite', type: :feature do
   # When I click the time input field
   # Then I see the lolliclock widget
   scenario 'activates lolliclock when time input is focused', js: true do
-    skip 'PhantomJS 2+ required' unless ENV['RAILS_SPEC_JS']
-
     visit root_path
     page.execute_script('document.getElementById("pick-a-time").click()')
 
