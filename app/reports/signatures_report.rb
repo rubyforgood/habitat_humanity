@@ -24,14 +24,30 @@ class SignaturesReport
   # @private
   #
   # @return [ActiveRecord::Relation]
-  def pull_join
+  def events_in_range(start_time, end_time)
+    ShiftEvent
+      .includes(shift: [:work_site, :volunteer])
+      .where(occurred_at: start_time..end_time,
+             work_sites:  { active: true })
+      .order(:occurred_at)
+  end
+
+  def events_in_range_at_site(start_time, end_time, site_id)
+    ShiftEvent
+      .joins(shift: [:work_site, :volunteer])
+      .where(occurred_at: start_time..end_time,
+             shifts:      { work_site_id:     site_id })
+      .includes(shift: [:work_site, :volunteer])
+      .order(:occurred_at)
+  end
+
+  def pull_join(site_id = -1)
     start_time = begin_date.in_time_zone.beginning_of_day
     end_time   = end_date.in_time_zone.end_of_day
 
-    ShiftEvent
-      .includes(shift: [:work_site, :volunteer])
-      .where(occurred_at: start_time..end_time)
-      .order(:occurred_at)
+    return events_in_range(start_time, end_time) if -1 == site_id
+
+    events_in_range_at_site(start_time, end_time, site_id)
   end
 
   ##

@@ -1,23 +1,29 @@
-<table class="hide-on-small-only">
-  <tr>
-    <td>Work Site</td>
-    <td>Day</td>
-    <td>Time</td>
-    <td>Action</td>
-    <td>Volunteer Name</td>
-    <td>Volunteer Email</td>
-    <td class="hide-on-med-and-down">Signature!</td>
-  </tr>
+<table class="hide-on-small-only striped bordered">
+  <thead>
+    <tr>
+      <th> Work Site            </th>
+      <th> Day                  </th>
+      <th> Time                 </th>
+      <th> Action               </th>
+      <th> Volunteer            </th>
+      <th class="hide-on-med-and-down">
+           Signature            </th>
+    </tr>
+  </thead>
 
-<% @shift_events.each do |event| %>
-  <tr class="entry">
-    <td><%= event.address %></td>
-    <td><%= event.occurred_at.to_date %></td>
-    <td><%= event.occurred_at.strftime("%I:%M%p") %></td>
-    <td><%= event.action %></td>
-    <td><%= event.volunteer_name %></td>
-    <td><%= event.volunteer_email %></td>
-    <td class="hide-on-med-and-down"><img width="650" src=<%= event.signature %> /></td>
-  </tr>
-<% end %>
+  <tbody>
+    <% @shift_events.each do |event| %>
+      <tr class="entry">
+        <td><%= event.address                           %></td>
+        <td><%= event.occurred_at.to_date               %></td>
+        <td><%= event.occurred_at.strftime("%I:%M%p")   %></td>
+        <td><%= event.action                            %></td>
+        <td><%= event.volunteer_email                   %></td>
+
+        <td class="m3 hide-on-med-and-down">
+          <img src="<%= event.signature %>"
+               class="sig-display" />                     </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
