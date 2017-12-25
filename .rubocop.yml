@@ -7,9 +7,22 @@ AllCops:
     - db/**/*
     - vendor/**/*
     - spec/factories/*
+Metrics/BlockLength:
+  Exclude:
+    - config/**/*
+    - Guardfile
+    - spec/**/*
+Style/FormatStringToken:
+  Enabled: false
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/DoubleNegation:
   Enabled: false
 Style/TrailingCommaInLiteral:
+  Enabled: false
+
+# dependent on rails version
+Rails/HttpPositionalArguments:
+  Enabled: false
+Rails/ApplicationRecord:
   Enabled: false

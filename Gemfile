@@ -20,24 +20,24 @@ gem 'validates_timeliness'
 group :production do
   gem 'newrelic_rpm'
   gem 'oj', '~> 2.12.14'
-  gem 'rollbar'
   gem 'rails_12factor'
+  gem 'rollbar'
 end
 
 group :development, :test do
   gem 'better_errors'
   gem 'faker'
-  gem 'rubocop'
-  gem 'poltergeist'
   gem 'phantomjs', require: 'phantomjs/poltergeist'
+  gem 'poltergeist'
+  gem 'rubocop'
 end
 
 group :development do
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'guard-rubocop', require: false
-  gem 'pry-rails'
   gem 'pry-doc'
+  gem 'pry-rails'
   gem 'rails-footnotes', '~> 4.0'
   gem 'spring'
   gem 'web-console', '~> 2.0'
@@ -46,7 +46,7 @@ end
 group :test do
   gem 'capybara', '~> 2.7.1'
   gem 'factory_girl_rails'
+  gem 'launchy'
   gem 'rspec-rails', '~> 3.0'
   gem 'timecop',  '~> 0.8.1'
-  gem 'launchy'
 end

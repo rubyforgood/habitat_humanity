@@ -22,34 +22,34 @@ class ShiftDashboard < Administrate::BaseDashboard
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
-  COLLECTION_ATTRIBUTES = [
-    :work_site,
-    :volunteer,
-    :id,
-    :day,
-    :minor
+  COLLECTION_ATTRIBUTES = %i[
+    work_site
+    volunteer
+    id
+    day
+    minor
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = [
-    :work_site,
-    :volunteer,
-    :id,
-    :day,
-    :minor,
-    :created_at,
-    :updated_at
+  SHOW_PAGE_ATTRIBUTES = %i[
+    work_site
+    volunteer
+    id
+    day
+    minor
+    created_at
+    updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = [
-    :work_site,
-    :volunteer,
-    :day,
-    :minor
+  FORM_ATTRIBUTES = %i[
+    work_site
+    volunteer
+    day
+    minor
   ].freeze
 
   # Overwrite this method to customize how shifts are displayed

@@ -4,5 +4,5 @@ namespace :spec do
   end
 
   desc 'Run RSpec tests and rubocop'
-  task all: [:spec, :rubocop]
+  task all: %i[spec rubocop]
 end

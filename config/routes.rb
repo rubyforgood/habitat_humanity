@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     root to: 'admin/shifts#index', as: :authenticated_root
   end
 
-  resources :check_ins, only: [:new, :create]
+  resources :check_ins, only: %i[new create]
 
   root to: 'check_ins#new'
 end
