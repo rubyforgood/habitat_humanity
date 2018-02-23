@@ -6,7 +6,7 @@ class Shift < ActiveRecord::Base
   validates :work_site, presence: true
   validates :volunteer, presence: true
   validates :day,       presence: true,
-                        uniqueness: { scope: [:work_site_id, :volunteer_id] }
+                        uniqueness: { scope: %i[work_site_id volunteer_id] }
 
   delegate :address, to: :work_site
   delegate :name, :email, to: :volunteer, prefix: true
@@ -80,7 +80,7 @@ class Shift < ActiveRecord::Base
   def breaks
     shift_events
       .select(:action, :occurred_at)
-      .where(action: %w(start_break end_break))
+      .where(action: %w[start_break end_break])
       .order(:occurred_at)
       .each_slice(2)
   end

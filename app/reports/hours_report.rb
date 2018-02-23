@@ -5,7 +5,7 @@ class HoursReport
   include DateLimitable
   include CSVGeneratable
 
-  JOINED_HEADERS = %i(address
+  JOINED_HEADERS = %i[address
                       day
                       volunteer_name
                       volunteer_email
@@ -15,7 +15,7 @@ class HoursReport
                       duration
                       duration_without_breaks
                       signature_in
-                      signature_out).freeze
+                      signature_out].freeze
 
   ##
   # Required for CSVGeneratable

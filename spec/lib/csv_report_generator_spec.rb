@@ -2,14 +2,14 @@ require 'csv_report_generator'
 
 describe CSVReportGenerator do
   class FakeRecord
-    FIELDS = %i(address
+    FIELDS = %i[address
                 day
                 occurred_at
                 action
                 volunteer_name
                 volunteer_email
                 minor
-                signature).freeze
+                signature].freeze
 
     attr_accessor(*FIELDS)
 

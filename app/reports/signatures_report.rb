@@ -5,14 +5,14 @@ class SignaturesReport
   include DateLimitable
   include CSVGeneratable
 
-  JOINED_HEADERS = %i(address
+  JOINED_HEADERS = %i[address
                       day
                       occurred_at
                       action
                       volunteer_name
                       volunteer_email
                       minor
-                      signature).freeze
+                      signature].freeze
 
   ##
   # Required for CSVGeneratable
@@ -29,7 +29,7 @@ class SignaturesReport
     end_time   = end_date.in_time_zone.end_of_day
 
     ShiftEvent
-      .includes(shift: [:work_site, :volunteer])
+      .includes(shift: %i[work_site volunteer])
       .where(occurred_at: start_time..end_time)
       .order(:occurred_at)
   end
